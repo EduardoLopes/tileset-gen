@@ -1,1 +1,41 @@
 /*! main.css */
+
+body{
+  color: #181818;
+}
+
+.container{
+  width: 880px;
+  margin: 0 auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.top-bar{
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.top-bar .title{
+  font-weight: bold;
+}
+
+.top-bar .menu{
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+.top-bar .menu .item{
+  float: left;
+}
+
+.top-bar .menu .item a{
+  text-decoration: none;
+  color: #181818;
+  padding: 0 7.5px 0 7.5px;
+}
+
+.top-bar .menu .item a:hover{
+  text-decoration: underline;
+}
