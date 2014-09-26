@@ -75,3 +75,24 @@ body{
   cursor: pointer;
   background: #e3e3e3;
 }
+
+.config{
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tilesets{
+  width: 320px;
+  margin: 0 auto;
+}
+
+#form-tilesize{
+  width: 64px;
+}
+
+.download{
+  float: right;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 2px;
+}
