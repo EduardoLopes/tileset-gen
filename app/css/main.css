@@ -81,9 +81,10 @@ body{
   border-bottom: 1px solid #ccc;
 }
 
-.tilesets{
+.tilesets-container{
   width: 320px;
   margin: 0 auto;
+  padding: 15px;
 }
 
 #form-tilesize{
