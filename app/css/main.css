@@ -76,6 +76,10 @@ body{
   background: #e3e3e3;
 }
 
+.file-input{
+  visibility: hidden;
+}
+
 .config{
   padding: 15px;
   border-bottom: 1px solid #ccc;

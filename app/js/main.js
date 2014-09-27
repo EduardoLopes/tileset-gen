@@ -2,11 +2,16 @@
 
   'use strict';
 
-  var tileset = document.getElementById('tilesets'),
-      ctxTileset = tileset.getContext('2d'),
-      tilesetContainer = document.getElementById('tilesets-container'),
-      sprite = document.getElementById('tileset-base-1'),
-      tileSize = 32;
+  var $tileset = document.getElementById('tilesets'),
+      ctxTileset = $tileset.getContext('2d'),
+      $tilesetContainer = document.getElementById('tilesets-container'),
+      $tilesetBase = document.getElementById('tileset-base-1'),
+      $baseInput = document.getElementById('base-add'),
+      $addTileset = document.getElementById('new-tileset-base'),
+      $tilesetBases = document.getElementById('tileset-bases'),
+      tileSize = 32,
+      tileSets = [],
+      tilesetsIndex = 0;
 
   var tilesetTemplate = [];
 
@@ -20,16 +25,16 @@
   //rezise the canvas tileset and and it's container div
   function tilesetSize(width, height){
 
-    tileset.width = width;
-    tileset.height = height;
+    $tileset.width = width;
+    $tileset.height = height;
 
-    tilesetContainer.style.width = width+'px';
-    tilesetContainer.style.height = height+'px';
+    $tilesetContainer.style.width = width+'px';
+    $tilesetContainer.style.height = height+'px';
 
   }
 
   //draw each peace of the tiles
-  function drawTile(x, y, type){
+  function drawTile(sprite, x, y, type){
 
     var spriteY = type / 6 >> 0;
     var spriteX = (type - spriteY * 6);
@@ -48,26 +53,63 @@
 
   }
 
-
-
   function generate(){
-    var h = 0, w = 0;
+    var h = 0, w = 0, i = 0;
 
     tilesetSize(
       tilesetTemplate[47].width * tileSize,
-      tilesetTemplate[47].height * tileSize
+      (tilesetTemplate[47].height * tileSize) * tileSets.length
     );
 
-    for (; h < tilesetTemplate[47].height * 2; h++) {
-      for (w = 0; w < tilesetTemplate[47].width * 2; w++) {
+    for (i = 0; i < tileSets.length; i++) {
 
-        drawTile(w, h, tilesetTemplate[47].map[(tilesetTemplate[47].width * 2) * h + w] - 1);
+      for (h = 0; h < tilesetTemplate[47].height * 2; h++) {
+        for (w = 0; w < tilesetTemplate[47].width * 2; w++) {
 
+          drawTile(tileSets[i], w, h + (i * (tilesetTemplate[47].height * 2)), tilesetTemplate[47].map[(tilesetTemplate[47].width * 2) * h + w] - 1);
+
+        }
       }
-    }
+
+    };
 
   }
 
-  generate();
+  //generate();
+
+  $baseInput.addEventListener('click', function() {
+
+    $addTileset.click();
+
+  });
+
+  $addTileset.addEventListener('change', function(e) {
+
+    var reader = new FileReader();
+
+    if (this.files && this.files[0]) {
+
+      reader.onload = function(event) {
+        var dataUri = event.target.result,
+            img = document.createElement('img'),
+            div = document.createElement('div');
+        img.src = dataUri;
+        div.appendChild(img);
+        div.classList.add('base')
+
+        tileSets[tilesetsIndex] = img;
+        tilesetsIndex++;
+
+        $baseInput.parentNode.insertBefore(div, $baseInput);
+
+        generate();
+
+      };
+
+      reader.readAsDataURL(this.files[0]);
+
+    }
+
+  });
 
 }(window));
