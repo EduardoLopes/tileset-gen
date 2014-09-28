@@ -55,19 +55,18 @@ body{
 }
 
 .tileset-bases .base{
-  white-space: normal;
   padding: 15px;
   border-right: 1px solid #ccc;
   height: 120px;
   width: 210px;
   display: inline-block;
-  float: left;
   text-align: center;
   line-height: 90px;
   color: #AFAFAF;
 }
 
 .tileset-bases .add{
+  /*white-space: normal;*/
 }
 
 .tileset-bases .add:hover{
