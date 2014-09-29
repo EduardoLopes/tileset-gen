@@ -7,19 +7,27 @@
       $tilesetContainer = document.getElementById('tilesets-container'),
       $tilesetBase = document.getElementById('tileset-base-1'),
       $baseInput = $('#base-add'),
+      $typeForm = $('#type'),
       $addTileset = document.getElementById('new-tileset-base'),
       $tilesetBases = $('#tileset-bases'),
       tileSize = 32,
       tileSets = [],
+      template = 0,
       tilesetsIndex = 0;
 
   var tilesetTemplate = [];
 
   //47 tiles template
-  tilesetTemplate[47] = {
-    map: [1, 2, 3, 2, 3, 4, 1, 4, 1, 2, 3, 2, 3, 4, 8, 9, 8, 9, 8, 9, 7, 14, 14, 8, 8, 10, 7, 10, 7, 5, 6, 5, 6, 10, 14, 5, 6, 5, 6, 15, 13, 14, 14, 8, 8, 16, 13, 16, 13, 11, 12, 11, 12, 16, 8, 11, 12, 11, 12, 9, 7, 8, 8, 8, 14, 10, 7, 10, 7, 5, 6, 5, 6, 10, 14, 5, 6, 5, 6, 9, 13, 8, 8, 8, 14, 16, 13, 16, 13, 11, 12, 11, 12, 16, 14, 11, 12, 11, 12, 9, 19, 20, 21, 20, 21, 22, 19, 22, 19, 20, 21, 20, 21, 22, 14, 15, 15, 15, 15, 15, 1, 2, 3, 2, 3, 4, 1, 4, 2, 3, 9, 10, 7, 9, 2, 3, 8, 11, 12, 8, 19, 20, 21, 20, 21, 22, 19, 22, 9, 5, 6, 16, 13, 5, 6, 9, 6, 5, 6, 5, 0, 0, 0, 0, 9, 11, 12, 9, 7, 11, 12, 9, 9, 11, 12, 10, 12, 11, 12, 11, 0, 0, 0, 0, 6, 9, 9, 5, 13, 9, 20, 21, 20, 21, 9, 16, 8, 5, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  tilesetTemplate[0] = {
+    map: [1, 2, 3, 2, 3, 4, 1, 4, 1, 2, 3, 2, 3, 4, 8, 9, 8, 9, 8, 9, 7, 14, 14, 8, 8, 10, 7, 10, 7, 5, 6, 5, 6, 10, 14, 5, 6, 5, 6, 15, 13, 14, 14, 8, 8, 16, 13, 16, 13, 11, 12, 11, 12, 16, 8, 11, 12, 11, 12, 9, 7, 8, 8, 8, 14, 10, 7, 10, 7, 5, 6, 5, 6, 10, 14, 5, 6, 5, 6, 9, 13, 8, 8, 8, 14, 16, 13, 16, 13, 11, 12, 11, 12, 16, 14, 11, 12, 11, 12, 9, 19, 20, 21, 20, 21, 22, 19, 22, 19, 20, 21, 20, 21, 22, 14, 15, 15, 15, 15, 15, 1, 2, 3, 2, 3, 4, 1, 4, 2, 3, 9, 10, 7, 9, 2, 3, 8, 11, 12, 8, 19, 20, 21, 20, 21, 22, 19, 22, 9, 5, 6, 16, 13, 5, 6, 9, 6, 5, 6, 5, 0, 0, 0, 0, 9, 11, 12, 9, 7, 11, 12, 9, 9, 11, 12, 10, 12, 11, 12, 11, 0, 0, 0, 0, 6, 9, 9, 5, 13, 9, 20, 21, 20, 21, 9, 16, 8, 5, 6, 8],
     width: 10,
     height: 5
+  };
+
+  tilesetTemplate[1] = {
+    map: [1, 2, 3, 2, 3, 4, 1, 4, 7, 14, 14, 8, 8, 10, 7, 10, 13, 14, 14, 8, 8, 16, 13, 16, 7, 8, 8, 8, 14, 10, 7, 10, 13, 8, 8, 8, 14, 16, 13, 16, 19, 20, 21, 20, 21, 22, 19, 22, 1, 2, 3, 2, 3, 4, 1, 4, 19, 20, 21, 20, 21, 22, 19, 22],
+    width: 4,
+    height: 4
   };
 
   // Array Remove - By John Resig (MIT Licensed)
@@ -43,9 +51,6 @@
 
     $tileset.width = width;
     $tileset.height = height;
-
-    //$tilesetContainer.style.width = width+'px';
-    //$tilesetContainer.style.height = height+'px';
 
   }
 
@@ -73,16 +78,16 @@
     var h = 0, w = 0, i = 0;
 
     tilesetSize(
-      tilesetTemplate[47].width * tileSize,
-      (tilesetTemplate[47].height * tileSize) * tileSets.length
+      tilesetTemplate[template].width * tileSize,
+      (tilesetTemplate[template].height * tileSize) * tileSets.length
     );
 
     for (i = 0; i < tileSets.length; i++) {
 
-      for (h = 0; h < tilesetTemplate[47].height * 2; h++) {
-        for (w = 0; w < tilesetTemplate[47].width * 2; w++) {
+      for (h = 0; h < tilesetTemplate[template].height * 2; h++) {
+        for (w = 0; w < tilesetTemplate[template].width * 2; w++) {
 
-          drawTile(tileSets[i], w, h + (i * (tilesetTemplate[47].height * 2)), tilesetTemplate[47].map[(tilesetTemplate[47].width * 2) * h + w] - 1);
+          drawTile(tileSets[i], w, h + (i * (tilesetTemplate[template].height * 2)), tilesetTemplate[template].map[(tilesetTemplate[template].width * 2) * h + w] - 1);
 
         }
       }
@@ -96,6 +101,11 @@
     tileSets.remove(tilesetIndex)
 
   }
+
+  $typeForm.on('change' , function() {
+    template = $typeForm.val();
+    generate();
+  });
 
   $('#download').on('click' , function() {
     console.log($tileset);
