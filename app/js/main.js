@@ -44,8 +44,8 @@
     $tileset.width = width;
     $tileset.height = height;
 
-    $tilesetContainer.style.width = width+'px';
-    $tilesetContainer.style.height = height+'px';
+    //$tilesetContainer.style.width = width+'px';
+    //$tilesetContainer.style.height = height+'px';
 
   }
 

@@ -31,7 +31,6 @@ var jsBuild = es.pipeline(
 );
 
 var cssBuild = es.pipeline(
-  uncss({ html: ['app/index.html'] }),
   concat('main.min.css'),
   cssmin(),
   gulp.dest('./dist/css')

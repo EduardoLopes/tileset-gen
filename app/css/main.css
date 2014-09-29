@@ -15,11 +15,13 @@ body{
   margin: 0 auto;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 .top-bar{
   padding: 15px;
   border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
 
 .top-bar .title{
@@ -48,7 +50,7 @@ body{
 
 .tileset-bases{
   border-bottom: 1px solid #ccc;
-  height: 150px;
+  height: 110px;
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
@@ -64,7 +66,7 @@ body{
   width: 190px;
   display: inline-block;
   text-align: center;
-  line-height: 120px;
+  line-height: 80px;
   color: #AFAFAF;
   font-size: 16px;
   position: relative;
@@ -121,9 +123,15 @@ body{
 }
 
 .tilesets-container{
-  width: 320px;
-  margin: 0 auto;
+  /*width: 320px;*/
+  overflow-y: auto;
+  height: 350px;
   padding: 15px;
+}
+
+#tilesets{
+  margin: 0 auto;
+  display: block;
 }
 
 #form-tilesize{
