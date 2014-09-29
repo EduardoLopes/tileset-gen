@@ -16,6 +16,7 @@ body{
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  position: relative;
 }
 
 .top-bar{
@@ -141,4 +142,53 @@ body{
   background: #fff;
   border: 1px solid #ccc;
   padding: 2px;
+}
+
+.modal{
+  position: absolute;
+  width: 870px;
+  height: 560px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ccc;
+  display: none;
+  overflow-y: auto;
+}
+
+.modal h2{
+  text-align: center;
+}
+
+.modal p{
+  padding: 0 30px;
+  line-height: 1.5;
+}
+
+.modal .close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  line-height: 30px;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.modal .close:hover {
+
+  color: #5E5E5E;
+  background: #e3e3e3;
+
+}
+
+#about{
+  display: block;
 }

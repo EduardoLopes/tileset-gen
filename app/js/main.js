@@ -11,6 +11,7 @@
       $formTilesize = $('#form-tilesize'),
       $addTileset = document.getElementById('new-tileset-base'),
       $tilesetBases = $('#tileset-bases'),
+      $modals = $('.modal'),
       tileSize = 32,
       tileSets = [],
       template = 0,
@@ -102,6 +103,28 @@
     tileSets.remove(tilesetIndex)
 
   }
+
+  function setModal(button, modal){
+    var $modal = $(modal);
+
+    $(button).on('click', function() {
+
+      $modal.toggle();
+
+      return false;
+    });
+
+  };
+
+  setModal('#menu-about', '#about');
+  setModal('#menu-help', '#help');
+
+  $('.modal .close').on('click', function() {
+
+    $(this).parent().toggle();
+
+  });
+
 
   $typeForm.on('change' , function() {
     template = $typeForm.val();
