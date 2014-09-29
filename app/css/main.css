@@ -48,25 +48,58 @@ body{
 
 .tileset-bases{
   border-bottom: 1px solid #ccc;
-  height: 120px;
+  height: 150px;
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
 }
 
+.tileset-bases {
+  font-size: 0;
+}
+
 .tileset-bases .base{
   padding: 15px;
   border-right: 1px solid #ccc;
-  height: 120px;
-  width: 210px;
+  width: 190px;
   display: inline-block;
   text-align: center;
-  line-height: 90px;
+  line-height: 120px;
   color: #AFAFAF;
+  font-size: 16px;
+  position: relative;
 }
 
 .tileset-bases .add{
-  /*white-space: normal;*/
+
+}
+
+.tileset-bases .base .remove{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+  white-space: normal;
+  line-height: 14px;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  visibility: hidden;
+  cursor: pointer;
+  cursor: pointer;
+}
+
+.tileset-bases .base .remove:hover {
+
+  color: #5E5E5E;
+  background: #e3e3e3;
+}
+
+.tileset-bases .base:hover > .remove{
+
+  visibility: visible;
+
 }
 
 .tileset-bases .add:hover{
@@ -77,6 +110,9 @@ body{
 
 .file-input{
   visibility: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .config{

@@ -6,9 +6,9 @@
       ctxTileset = $tileset.getContext('2d'),
       $tilesetContainer = document.getElementById('tilesets-container'),
       $tilesetBase = document.getElementById('tileset-base-1'),
-      $baseInput = document.getElementById('base-add'),
+      $baseInput = $('#base-add'),
       $addTileset = document.getElementById('new-tileset-base'),
-      $tilesetBases = document.getElementById('tileset-bases'),
+      $tilesetBases = $('#tileset-bases'),
       tileSize = 32,
       tileSets = [],
       tilesetsIndex = 0;
@@ -21,6 +21,22 @@
     width: 10,
     height: 5
   };
+
+  // Array Remove - By John Resig (MIT Licensed)
+  Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+  };
+
+  function clearFileInput(fileInput) {
+    try {
+      fileInput.value = null;
+    } catch(ex) { }
+    if (fileInput.value) {
+      fileInput.parentNode.replaceChild(fileInput.cloneNode(true), fileInput);
+    }
+  }
 
   //rezise the canvas tileset and and it's container div
   function tilesetSize(width, height){
@@ -75,9 +91,30 @@
 
   }
 
-  //generate();
+  function removeTileset(tilesetIndex){
 
-  $baseInput.addEventListener('click', function() {
+    tileSets.remove(tilesetIndex)
+
+  }
+
+  $tilesetBases.on('click', '.tileset-base .remove', function() {
+    var $this = $(this).parent();
+
+    removeTileset($this.data('index'));
+
+    $this.remove();
+
+    $('.tileset-base').each(function(index) {
+
+      $(this).attr('data-index', index);
+
+    });
+
+    generate();
+
+  });
+
+  $baseInput.on('click', function() {
 
     $addTileset.click();
 
@@ -91,22 +128,26 @@
 
       reader.onload = function(event) {
         var dataUri = event.target.result,
-            img = document.createElement('img'),
-            div = document.createElement('div');
+            img = document.createElement('img');
+
         img.src = dataUri;
-        div.appendChild(img);
-        div.classList.add('base')
 
-        tileSets[tilesetsIndex] = img;
-        tilesetsIndex++;
+        $(
+          '<div class="base tileset-base" data-index="'+tileSets.length+'">'+
+            '<div class="remove">x</div>'+
+            '<img src="'+dataUri+'" id="'+tileSets.length+'">'+
+          '</div>'
+        ).insertBefore('#base-add');
 
-        $baseInput.parentNode.insertBefore(div, $baseInput);
+        tileSets[tileSets.length] = img;
 
         generate();
 
       };
 
       reader.readAsDataURL(this.files[0]);
+
+      clearFileInput(this);
 
     }
 
