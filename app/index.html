@@ -40,7 +40,7 @@
             </div>
             <div class="config">
                 Tilesize: <input id="form-tilesize" value="32" type="number" />
-                <button class="download">Download</button>
+                <button id="download" class="download">Download</button>
             </div>
             <div id="tilesets-container" class="tilesets-container">
                 <canvas id="tilesets"></canvas>
@@ -51,6 +51,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <!-- htmlbuild:js js/main.js -->
+        <script src="js/vendor/Blob.js"></script>
+        <script src="js/vendor/canvas-toBlob.js"></script>
+        <script src="js/vendor/FileSaver.js"></script>
         <script src="js/main.js"></script>
         <!-- endbuild -->
 

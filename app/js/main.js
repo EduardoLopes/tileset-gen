@@ -97,6 +97,13 @@
 
   }
 
+  $('#download').on('click' , function() {
+    console.log($tileset);
+    $tileset.toBlob(function(blob) {
+      saveAs(blob, "tileset.png");
+    });
+  });
+
   $tilesetBases.on('click', '.tileset-base .remove', function() {
     var $this = $(this).parent();
 
