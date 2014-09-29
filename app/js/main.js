@@ -8,6 +8,7 @@
       $tilesetBase = document.getElementById('tileset-base-1'),
       $baseInput = $('#base-add'),
       $typeForm = $('#type'),
+      $formTilesize = $('#form-tilesize'),
       $addTileset = document.getElementById('new-tileset-base'),
       $tilesetBases = $('#tileset-bases'),
       tileSize = 32,
@@ -104,6 +105,11 @@
 
   $typeForm.on('change' , function() {
     template = $typeForm.val();
+    generate();
+  });
+
+  $formTilesize.on('change' , function() {
+    tileSize = $formTilesize.val();
     generate();
   });
 

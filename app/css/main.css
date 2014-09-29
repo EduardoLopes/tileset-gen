@@ -50,7 +50,6 @@ body{
 
 .tileset-bases{
   border-bottom: 1px solid #ccc;
-  height: 110px;
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
@@ -63,7 +62,6 @@ body{
 .tileset-bases .base{
   padding: 15px;
   border-right: 1px solid #ccc;
-  width: 190px;
   display: inline-block;
   text-align: center;
   line-height: 80px;
