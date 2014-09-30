@@ -29,6 +29,10 @@ body{
   font-weight: bold;
 }
 
+.top-bar .title sup{
+  font-size: 9px;
+}
+
 .top-bar .menu{
   margin: 0;
   padding: 0;
