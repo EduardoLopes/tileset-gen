@@ -101,7 +101,7 @@ gulp.task('copy:images', function() {
 
 gulp.task('zip', function () {
 
-    return gulp.src('dist/*')
+    return gulp.src('dist/**/*')
           .pipe(zip('tileset-gen.zip'))
           .pipe(gulp.dest('dist'));
 
