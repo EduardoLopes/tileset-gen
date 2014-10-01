@@ -198,6 +198,7 @@ body{
   padding: 15px;
   background: #FF9393;
   position: relative;
+  display: none;
 }
 
 .error .close{

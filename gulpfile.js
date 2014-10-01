@@ -10,6 +10,7 @@ var webserver = require('gulp-webserver');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
+var zip = require('gulp-zip');
 
 var gulpSrc = function (opts) {
   var paths = es.through();
@@ -44,7 +45,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('htmlbuild',  function(cb) {
 
-  gulp.src(['app/index.html'])
+  return gulp.src(['app/index.html'])
     .pipe(htmlbuild({
 
       js: htmlbuild.preprocess.js(function (block) {
@@ -71,15 +72,11 @@ gulp.task('htmlbuild',  function(cb) {
     }))
     .pipe(gulp.dest('./dist'));
 
-  //Copy
-  gulp.src('app/img/*.{png,jpg}')
-  .pipe(gulp.dest('./dist/img'));
+});
 
-  gulp.src('app/js/vendor/*')
-  .pipe(gulp.dest('./dist/js/vendor'));
+gulp.task('copy:others', function() {
 
-  //anothers files
-  gulp.src([
+  return gulp.src([
     'app/favicon.ico',
     'app/humans.txt',
     'app/robots.txt'
@@ -88,9 +85,31 @@ gulp.task('htmlbuild',  function(cb) {
 
 });
 
+gulp.task('copy:vendor', function() {
+
+  return gulp.src('app/js/vendor/*')
+        .pipe(gulp.dest('./dist/js/vendor'));
+
+});
+
+gulp.task('copy:images', function() {
+
+  return gulp.src('app/img/*.{png,jpg}')
+        .pipe(gulp.dest('./dist/img'));
+
+});
+
+gulp.task('zip', function () {
+
+    return gulp.src('dist/*')
+          .pipe(zip('tileset-gen.zip'))
+          .pipe(gulp.dest('dist'));
+
+});
+
 gulp.task('default', function(cb) {
 
-  runSequence('clean', 'htmlbuild');
+  runSequence('clean', 'htmlbuild', ['copy:images', 'copy:vendor', 'copy:others'], 'zip');
 
 });
 
