@@ -192,3 +192,23 @@ body{
   background: #e3e3e3;
 
 }
+
+
+.error{
+  padding: 15px;
+  background: #FF9393;
+  position: relative;
+}
+
+.error .close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px 22px;
+  border-left: 1px #ccc solid;
+}
+
+.error .close:hover{
+  background: #FFB3B3;
+  cursor: pointer;
+}
