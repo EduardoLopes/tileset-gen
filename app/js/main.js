@@ -33,6 +33,13 @@
     height: 4
   };
 
+  tilesetTemplate[2] = {
+    map: [1, 4, 13, 16, 1, 2, 13, 11, 1, 4, 7, 10, 1, 2, 7, 11, 3, 4, 12, 16, 19, 22, 19, 22, 19, 20, 19, 20, 7, 10, 13, 16, 7, 5, 13, 5, 21, 22, 21, 22, 2, 3, 12, 11, 3, 4, 12, 10, 2, 3, 12, 11, 0, 0, 0, 0, 0, 0, 0, 0, 20, 21, 20, 21, 6, 16, 6, 16, 6, 5, 6, 5, 0, 0, 0, 0, 0, 0, 0, 0],
+    width: 10,
+    height: 2
+  };
+
+
   // Array Remove - By John Resig (MIT Licensed)
   Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
