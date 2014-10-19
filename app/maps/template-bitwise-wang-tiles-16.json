@@ -1,0 +1,40 @@
+{ "height":4,
+ "layers":[
+        {
+         "data":[1, 4, 20, 21, 1, 7, 13, 14, 1, 4, 20, 21, 1, 2, 20, 9, 3, 4, 15, 16, 19, 19, 19, 22, 19, 13, 19, 20, 7, 10, 2, 3, 7, 8, 2, 15, 21, 22, 21, 22, 10, 7, 8, 9, 3, 4, 8, 21, 3, 2, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 16, 13, 21, 20, 9, 10, 14, 3, 14, 15, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":4,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":20,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "tileheight":16,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"..\/..\/..\/..\/..\/home\/eduardo\/Desktop\/tileset-base-test.png",
+         "imageheight":64,
+         "imagewidth":96,
+         "margin":0,
+         "name":"tileset-base-test",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":16,
+         "tilewidth":16,
+         "transparentcolor":"#ffffff"
+        }],
+ "tilewidth":16,
+ "version":1,
+ "width":20
+}
