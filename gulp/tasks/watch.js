@@ -9,7 +9,11 @@ gulp.task('watch', function() {
 
   livereload.listen();
 
-  gulp.watch([app + '/**/*', '!js/bundle.js']).on('change', livereload.changed);
+  gulp.watch([
+    app + '/**/*',
+    '!'+ app +'/js/**/*',
+    app +'/js/bundle.js'
+  ]).on('change', livereload.changed);
 
 });
 
