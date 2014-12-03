@@ -4,6 +4,7 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 var browserify = require('browserify');
 var config = require('../config');
+var reactify = require('reactify');
 
 var app = config.dir.app;
 
@@ -19,7 +20,7 @@ gulp.task('browserify', function() {
 
   function rebundle() {
 
-    return bundler.bundle()
+    return bundler.transform(reactify).bundle()
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('bundle.js'))
@@ -34,8 +35,9 @@ gulp.task('browserify:build', function() {
 
   var bundler = browserify(app + '/js/main.js');
 
-  return bundler.bundle()
+  return bundler.transform(reactify).bundle()
     // log errors if they happen
+    .transform(reactify)
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source('bundle.js'))
     .pipe(gulp.dest(app + '/js'));
