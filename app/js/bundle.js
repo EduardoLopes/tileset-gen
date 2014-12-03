@@ -1,17 +1,71 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app/js/main.js":[function(require,module,exports){
 var React = require('react');
+var _ = require('lodash');
 var TopBar = require('./components/top-bar.js');
-var TilesetBasesContainers = require('./components/tileset-bases-container.js');
+var TilesetBasesContainer = require('./components/tileset-bases-container.js');
+
+var TilesetGen = React.createClass({displayName: 'TilesetGen',
+  currentID: 0,
+   getInitialState: function() {
+
+    return {
+      tilesets: []
+    };
+
+  },
+  handleTilesetUpload: function(file){
+
+    var tilesets = this.state.tilesets;
+
+     if (file) {
+
+      reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+       reader.onload = function(event) {
+
+        var dataUri = event.target.result;
+        var img = document.createElement('img');
+
+         img.src = dataUri;
+
+         tilesets.unshift({
+           uri: dataUri,
+           img: img,
+           id: this.currentID++
+         });
+
+        this.setState({tilesets: tilesets});
+
+      }.bind(this);
+
+    }
+
+  },
+  onClose: function(id){
+
+    var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
+
+    this.setState({tilesets: newTilesets});
+
+  },
+  render: function() {
+    return (
+      React.createElement("div", null, 
+        React.createElement(TopBar, null), 
+        React.createElement(TilesetBasesContainer, {tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload})
+      )
+    );
+  }
+});
 
 React.render(
-  React.createElement("div", null, 
-    React.createElement(TopBar, null), 
-    React.createElement(TilesetBasesContainers, null)
-  ),
+  React.createElement(TilesetGen, null),
   document.getElementById('container')
 );
 
-},{"./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/menu-item.js":[function(require,module,exports){
+},{"./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/menu-item.js":[function(require,module,exports){
 var React = require('react');
 
 var MenuItem = React.createClass({displayName: 'MenuItem',
@@ -51,52 +105,17 @@ module.exports = TilesetBase;
 
 },{"react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/tileset-bases-container.js":[function(require,module,exports){
 var React = require('react');
-var _ = require('lodash');
 var TilesetBase = require('./tileset-base.js');
 var TilesetUpload = require('./tileset-upload.js');
 
 var TilesetBaseContainer = React.createClass({displayName: 'TilesetBaseContainer',
-   currentID: 0,
-   getInitialState: function() {
 
-    return {
-      tilesets: []
-    };
-
-  },
-  handleTilesetUpload: function(file){
-    var tilesets = this.state.tilesets;
-
-     if (file) {
-
-      reader = new FileReader();
-
-      reader.readAsDataURL(file);
-
-       reader.onload = function(event) {
-
-        var dataUri = event.target.result;
-        tilesets.unshift({uri: dataUri, id: this.currentID++});
-        this.setState({tilesets: tilesets});
-
-      }.bind(this);
-
-    }
-
-  },
-  onClose: function(id){
-
-    var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
-
-    this.setState({tilesets: newTilesets});
-
-  },
   render: function() {
 
-    var tilesetItens = this.state.tilesets.map(function(tileset, index) {
+    var tilesetItens = this.props.tilesets.map(function(tileset, index) {
 
       return (
-        React.createElement(TilesetBase, {close: this.onClose, dataUri: tileset.uri, id: tileset.id, key: index})
+        React.createElement(TilesetBase, {close: this.props.onClose, dataUri: tileset.uri, id: tileset.id, key: index})
       );
 
     }.bind(this));
@@ -104,16 +123,17 @@ var TilesetBaseContainer = React.createClass({displayName: 'TilesetBaseContainer
     return (
       React.createElement("div", {className: "tileset-bases"}, 
         tilesetItens, 
-        React.createElement(TilesetUpload, {onTilesetUpload: this.handleTilesetUpload})
+        React.createElement(TilesetUpload, {onTilesetUpload: this.props.handleTilesetUpload})
       )
     );
+
   }
 
 });
 
 module.exports = TilesetBaseContainer;
 
-},{"./tileset-base.js":"/var/www/tileset-gen/app/js/components/tileset-base.js","./tileset-upload.js":"/var/www/tileset-gen/app/js/components/tileset-upload.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/tileset-upload.js":[function(require,module,exports){
+},{"./tileset-base.js":"/var/www/tileset-gen/app/js/components/tileset-base.js","./tileset-upload.js":"/var/www/tileset-gen/app/js/components/tileset-upload.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/tileset-upload.js":[function(require,module,exports){
 var React = require('react');
 
 function clearFileInput(fileInput) {
