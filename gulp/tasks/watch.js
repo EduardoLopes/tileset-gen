@@ -9,7 +9,7 @@ gulp.task('watch', function() {
 
   livereload.listen();
 
-  gulp.watch([app + '/**/*', '!js/**/*']).on('change', livereload.changed);
+  gulp.watch([app + '/**/*', '!js/bundle.js']).on('change', livereload.changed);
 
 });
 

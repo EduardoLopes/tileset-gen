@@ -32,5 +32,8 @@
   "browserify-shim": {
     "./app/js/vendor/Blob.js": "blob",
     "./app/js/vendor/canvas-toBlob.js": "canvas-to-blob"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1"
   }
 }
