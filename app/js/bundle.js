@@ -4,13 +4,15 @@ var _ = require('lodash');
 var TopBar = require('./components/top-bar.js');
 var TilesetBasesContainer = require('./components/tileset-bases-container.js');
 var MainCanvas = require('./components/main-canvas.js');
+var EditBar = require('./components/edit-bar.js');
 
 var TilesetGen = React.createClass({displayName: 'TilesetGen',
   currentID: 0,
   getInitialState: function() {
 
     return {
-      tilesets: []
+      tilesets: [],
+      selectedTileSet: null
     };
 
   },
@@ -32,7 +34,8 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
         tilesets.unshift({
           uri: dataUri,
           img: img,
-          id: this.currentID++
+          id: this.currentID++,
+          type: 0
         });
 
         this.setState({tilesets: tilesets});
@@ -44,16 +47,48 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
   },
   onClose: function(id){
 
+    if(this.state.selectedTileSet == id){
+      this.setState({selectedTileSet: null});
+    }
+
     var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
 
     this.setState({tilesets: newTilesets});
 
   },
+  handleUpdateTileset: function(id, type){
+
+    var tilesets = this.state.tilesets;
+
+    var index = _.findIndex(this.state.tilesets, function(tileset) {
+
+      return tileset.id == id;
+    });
+
+    tilesets[index].type = +type;
+    this.setState({tilesets: tilesets});
+
+  },
+  handleSelectTileset: function(id){
+
+    if(this.state.selectedTileSet == id){
+      this.setState({selectedTileSet: null});
+
+      return false;
+    }
+
+    this.setState({selectedTileSet: id});
+
+
+  },
+  editBarClass: 'hidden',
   render: function() {
+
     return (
       React.createElement("div", null, 
         React.createElement(TopBar, null), 
-        React.createElement(TilesetBasesContainer, {tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload}), 
+        React.createElement(TilesetBasesContainer, {selected: this.state.selectedTileSet, selectTileset: this.handleSelectTileset, tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload}), 
+        React.createElement(EditBar, {tilesets: this.state.tilesets, updateTileset: this.handleUpdateTileset, selected: this.state.selectedTileSet}), 
         React.createElement(MainCanvas, {tilesets: this.state.tilesets})
       )
     );
@@ -65,7 +100,57 @@ React.render(
   document.getElementById('container')
 );
 
-},{"./components/main-canvas.js":"/var/www/tileset-gen/app/js/components/main-canvas.js","./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/main-canvas.js":[function(require,module,exports){
+},{"./components/edit-bar.js":"/var/www/tileset-gen/app/js/components/edit-bar.js","./components/main-canvas.js":"/var/www/tileset-gen/app/js/components/main-canvas.js","./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/edit-bar.js":[function(require,module,exports){
+var React = require('react');
+var _ = require('lodash');
+
+var EditBar = React.createClass({displayName: 'EditBar',
+  handleOnSelectChange: function(){
+
+    this.props.updateTileset(this.props.selected, this.refs.type.getDOMNode().value);
+
+  },
+  render: function() {
+    var className;
+    var defaultSelectValue = 0;
+
+    if(this.props.selected == null){
+      className = 'hidden';
+    } else {
+      className = '';
+    }
+
+    var index = _.findIndex(this.props.tilesets, function(tileset) {
+
+      return tileset.id == this.props.selected;
+
+    }.bind(this));
+
+    if(this.props.selected != null && index > -1){
+      defaultSelectValue = this.props.tilesets[index].type;
+    }
+
+    return (
+      React.createElement("div", {className: "config"}, 
+        "Tilesize: ", React.createElement("input", {id: "form-tilesize", defaultValue: "32", type: "number", step: "8", min: "8", max: "256"}), 
+        React.createElement("span", {className: className}, " Type:", 
+          React.createElement("select", {ref: "type", name: "type", id: "type", value: defaultSelectValue, onChange: this.handleOnSelectChange}, 
+            React.createElement("option", {value: "0"}, "1"), 
+            React.createElement("option", {value: "1"}, "2"), 
+            React.createElement("option", {value: "2"}, "3"), 
+            React.createElement("option", {value: "3"}, "4 - wang-tiles"), 
+            React.createElement("option", {value: "4"}, "5 - wang-tiles-corner")
+          )
+        ), 
+        React.createElement("button", {className: "download"}, "Download")
+      )
+    );
+  }
+});
+
+module.exports = EditBar;
+
+},{"lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/main-canvas.js":[function(require,module,exports){
 var React = require('react');
 
 var MainCanvas = React.createClass({displayName: 'MainCanvas',
@@ -125,9 +210,22 @@ var TilesetBase = React.createClass({displayName: 'TilesetBase',
     this.props.close(this.props.id);
 
   },
+  hanldeOnClick: function (){
+
+    this.props.select(this.props.id);
+
+  },
   render: function() {
+    var classNane;
+
+    if(this.props.selected){
+      classNane = 'base tileset-base active';
+    } else {
+      classNane = 'base tileset-base';
+    }
+
     return (
-      React.createElement("div", {className: "base tileset-base"}, 
+      React.createElement("div", {onClick: this.hanldeOnClick, className: classNane}, 
         React.createElement("div", {onClick: this.onClose, className: "remove"}, "x"), 
         React.createElement("img", {src: this.props.dataUri})
       )
@@ -147,9 +245,14 @@ var TilesetBaseContainer = React.createClass({displayName: 'TilesetBaseContainer
   render: function() {
 
     var tilesetItens = this.props.tilesets.map(function(tileset, index) {
+      var selected = false;
+
+      if(this.props.selected == tileset.id){
+        selected = true;
+      }
 
       return (
-        React.createElement(TilesetBase, {close: this.props.onClose, dataUri: tileset.uri, id: tileset.id, key: index})
+        React.createElement(TilesetBase, {selected: selected, select: this.props.selectTileset, close: this.props.onClose, dataUri: tileset.uri, id: tileset.id, key: index})
       );
 
     }.bind(this));

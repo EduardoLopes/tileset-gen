@@ -76,6 +76,14 @@ body{
   position: relative;
 }
 
+.tileset-base{
+  cursor: pointer;
+}
+
+.tileset-base.active{
+  background: #efefef;
+}
+
 .tileset-bases .add{
 
 }
@@ -212,3 +220,4 @@ body{
   background: #FFB3B3;
   cursor: pointer;
 }
+
