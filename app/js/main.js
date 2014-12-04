@@ -2,10 +2,11 @@ var React = require('react');
 var _ = require('lodash');
 var TopBar = require('./components/top-bar.js');
 var TilesetBasesContainer = require('./components/tileset-bases-container.js');
+var MainCanvas = require('./components/main-canvas.js');
 
 var TilesetGen = React.createClass({
   currentID: 0,
-   getInitialState: function() {
+  getInitialState: function() {
 
     return {
       tilesets: []
@@ -19,21 +20,19 @@ var TilesetGen = React.createClass({
      if (file) {
 
       reader = new FileReader();
-
       reader.readAsDataURL(file);
 
        reader.onload = function(event) {
 
         var dataUri = event.target.result;
         var img = document.createElement('img');
+        img.src = dataUri;
 
-         img.src = dataUri;
-
-         tilesets.unshift({
-           uri: dataUri,
-           img: img,
-           id: this.currentID++
-         });
+        tilesets.unshift({
+          uri: dataUri,
+          img: img,
+          id: this.currentID++
+        });
 
         this.setState({tilesets: tilesets});
 
@@ -54,6 +53,7 @@ var TilesetGen = React.createClass({
       <div>
         <TopBar/>
         <TilesetBasesContainer tilesets={this.state.tilesets} onClose={this.onClose} handleTilesetUpload={this.handleTilesetUpload} />
+        <MainCanvas tilesets={this.state.tilesets} />
       </div>
     );
   }

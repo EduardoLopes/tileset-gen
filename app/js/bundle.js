@@ -3,10 +3,11 @@ var React = require('react');
 var _ = require('lodash');
 var TopBar = require('./components/top-bar.js');
 var TilesetBasesContainer = require('./components/tileset-bases-container.js');
+var MainCanvas = require('./components/main-canvas.js');
 
 var TilesetGen = React.createClass({displayName: 'TilesetGen',
   currentID: 0,
-   getInitialState: function() {
+  getInitialState: function() {
 
     return {
       tilesets: []
@@ -20,21 +21,19 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
      if (file) {
 
       reader = new FileReader();
-
       reader.readAsDataURL(file);
 
        reader.onload = function(event) {
 
         var dataUri = event.target.result;
         var img = document.createElement('img');
+        img.src = dataUri;
 
-         img.src = dataUri;
-
-         tilesets.unshift({
-           uri: dataUri,
-           img: img,
-           id: this.currentID++
-         });
+        tilesets.unshift({
+          uri: dataUri,
+          img: img,
+          id: this.currentID++
+        });
 
         this.setState({tilesets: tilesets});
 
@@ -54,7 +53,8 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
     return (
       React.createElement("div", null, 
         React.createElement(TopBar, null), 
-        React.createElement(TilesetBasesContainer, {tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload})
+        React.createElement(TilesetBasesContainer, {tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload}), 
+        React.createElement(MainCanvas, {tilesets: this.state.tilesets})
       )
     );
   }
@@ -65,7 +65,41 @@ React.render(
   document.getElementById('container')
 );
 
-},{"./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/menu-item.js":[function(require,module,exports){
+},{"./components/main-canvas.js":"/var/www/tileset-gen/app/js/components/main-canvas.js","./components/tileset-bases-container.js":"/var/www/tileset-gen/app/js/components/tileset-bases-container.js","./components/top-bar.js":"/var/www/tileset-gen/app/js/components/top-bar.js","lodash":"/var/www/tileset-gen/node_modules/lodash/dist/lodash.js","react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/main-canvas.js":[function(require,module,exports){
+var React = require('react');
+
+var MainCanvas = React.createClass({displayName: 'MainCanvas',
+  ctx: null,
+  componentDidMount: function() {
+
+    this.canvas = this.refs.tilesets.getDOMNode();
+    this.ctx = this.canvas.getContext('2d');
+
+  },
+  generateTileset: function(){
+
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.drawImage(this.props.tilesets[0].img, 0, 0);
+
+  },
+  render: function() {
+
+    if(this.ctx && this.props.tilesets.length > 0)
+      this.generateTileset();
+    else if(this.ctx && this.props.tilesets.length == 0)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    return (
+      React.createElement("div", {className: "tilesets-container"}, 
+        React.createElement("canvas", {className: "tilesets-canvas", ref: "tilesets"})
+      )
+    );
+  }
+});
+
+module.exports = MainCanvas;
+
+},{"react":"/var/www/tileset-gen/node_modules/react/react.js"}],"/var/www/tileset-gen/app/js/components/menu-item.js":[function(require,module,exports){
 var React = require('react');
 
 var MenuItem = React.createClass({displayName: 'MenuItem',
