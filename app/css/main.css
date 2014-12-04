@@ -135,6 +135,7 @@ body{
 }
 
 .tilesets-container{
+  position: relative;
   overflow-y: auto;
   height: 350px;
   padding: 15px;
@@ -150,10 +151,14 @@ body{
 }
 
 .download{
-  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   background: #fff;
-  border: 1px solid #ccc;
-  padding: 2px;
+  border: 0px;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  padding: 15px;
 }
 
 .modal{
