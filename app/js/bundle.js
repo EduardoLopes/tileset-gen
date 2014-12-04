@@ -47,13 +47,13 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
   },
   onClose: function(id){
 
-    if(this.state.selectedTileSet == id){
-      this.setState({selectedTileSet: null});
-    }
-
     var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
 
     this.setState({tilesets: newTilesets});
+
+    if(this.state.selectedTileSet == id){
+      this.setState({selectedTileSet: null});
+    }
 
   },
   handleUpdateTileset: function(id, type){
@@ -79,9 +79,7 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
 
     this.setState({selectedTileSet: id});
 
-
   },
-  editBarClass: 'hidden',
   render: function() {
 
     return (
@@ -210,9 +208,10 @@ var TilesetBase = React.createClass({displayName: 'TilesetBase',
     this.props.close(this.props.id);
 
   },
-  hanldeOnClick: function (){
+  hanldeOnClick: function (event){
 
-    this.props.select(this.props.id);
+    if(this.refs.remove.getDOMNode() != event.target)
+      this.props.select(this.props.id);
 
   },
   render: function() {
@@ -226,7 +225,7 @@ var TilesetBase = React.createClass({displayName: 'TilesetBase',
 
     return (
       React.createElement("div", {onClick: this.hanldeOnClick, className: classNane}, 
-        React.createElement("div", {onClick: this.onClose, className: "remove"}, "x"), 
+        React.createElement("div", {ref: "remove", onClick: this.onClose, className: "remove"}, "x"), 
         React.createElement("img", {src: this.props.dataUri})
       )
     );

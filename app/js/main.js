@@ -46,13 +46,13 @@ var TilesetGen = React.createClass({
   },
   onClose: function(id){
 
-    if(this.state.selectedTileSet == id){
-      this.setState({selectedTileSet: null});
-    }
-
     var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
 
     this.setState({tilesets: newTilesets});
+
+    if(this.state.selectedTileSet == id){
+      this.setState({selectedTileSet: null});
+    }
 
   },
   handleUpdateTileset: function(id, type){
@@ -78,9 +78,7 @@ var TilesetGen = React.createClass({
 
     this.setState({selectedTileSet: id});
 
-
   },
-  editBarClass: 'hidden',
   render: function() {
 
     return (
