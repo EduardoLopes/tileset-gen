@@ -33,13 +33,20 @@ You got the idea!
 Some examples:
 ----------------------
 
+
 Generate 32x32 tiles:
 
 ![tileset base example 1](http://i.imgur.com/NQs3KxC.png)
 
 Generate 16x16 tiles:
 
-![tileset base example 2](http://i.imgur.com/7F9407n.png)
+![ tileset base example 2](http://i.imgur.com/7F9407n.png)
+
+Generate 32x32 tiles that don't match corners:
+
+![tileset base example 2](http://i.imgur.com/JerC94P.png)
+
+This last base example it's for use with type 2 tile set (that generate 16 tiles), or with the type 3 (bitwise), that generate a tileset to use with the [bitwise auto tile algorithm](http://www.saltgames.com/2010/a-bitwise-method-for-applying-tilemaps/)!
 
 You can download these examples and use to test the app! When upload the tileset base, you need to set the tile size in the edit bar.
 
