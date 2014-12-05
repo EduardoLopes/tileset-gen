@@ -43,7 +43,7 @@ var TopBar = React.createClass({
 
     return (
       <nav className="top-bar">
-        <span className="title">Tileset Gen <sup>Alpha 0.0.9</sup>  </span>
+        <span className="title">Tileset Gen <sup>Alpha 0.1.0</sup>  </span>
         <ul className="menu">
           {menuItens}
         </ul>
