@@ -33,22 +33,6 @@
          "tileheight":16,
          "tilewidth":16,
          "transparentcolor":"#ffffff"
-        }, 
-        {
-         "firstgid":25,
-         "image":"..\/img\/tileset-base-test-2.png",
-         "imageheight":96,
-         "imagewidth":64,
-         "margin":0,
-         "name":"tileset-base-test-2",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tilewidth":16,
-         "transparentcolor":"#ffffff"
         }],
  "tilewidth":16,
  "version":1,
