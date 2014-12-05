@@ -37,7 +37,6 @@ gulp.task('browserify:build', function() {
 
   return bundler.transform(reactify).bundle()
     // log errors if they happen
-    .transform(reactify)
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source('bundle.js'))
     .pipe(gulp.dest(app + '/js'));

@@ -31,11 +31,11 @@ var jsBuild = es.pipeline(
 );
 
 var cssBuild = es.pipeline(
-  uncss({ html: [app + '/index.html'] }),
+  //uncss({ html: [app + '/index.html'] }),
   concat('main.min.css'),
   cssmin(),
   gulp.dest(dist + '/css'),
-  uncss({ html: [app + '/index.html'] }),
+  //uncss({ html: [app + '/index.html'] }),
   rename('main.css'),
   gulp.dest(dist + '/css')
 );
