@@ -4,7 +4,7 @@ var MenuItem = React.createClass({
   render: function() {
     return (
       <li className="item">
-        <a onClick={this.props.handleOnClick} href="#">
+        <a onClick={this.props.handleOnClick} href={this.props.url} target="_black">
           {this.props.children}
         </a>
       </li>

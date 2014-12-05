@@ -7,16 +7,17 @@ var TopBar = React.createClass({
     return {
       data: [
         {
+          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#how-it-works',
           name: 'Help',
           onClick:  function(event){
-            event.preventDefault();
+
 
           },
         },
         {
+          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#tileset-gen',
           name: 'About',
           onClick: function(event){
-            event.preventDefault();
 
           },
         }
@@ -33,7 +34,7 @@ var TopBar = React.createClass({
 
     var menuItens = this.state.data.map(function(item, index) {
       return (
-        <MenuItem handleOnClick={item.onClick} key={index}>
+        <MenuItem handleOnClick={item.onClick} url={item.url} key={index}>
           {item.name}
         </MenuItem>
       );

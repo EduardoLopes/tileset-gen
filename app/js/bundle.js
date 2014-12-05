@@ -290,7 +290,7 @@ var MenuItem = React.createClass({displayName: 'MenuItem',
   render: function() {
     return (
       React.createElement("li", {className: "item"}, 
-        React.createElement("a", {onClick: this.props.handleOnClick, href: "#"}, 
+        React.createElement("a", {onClick: this.props.handleOnClick, href: this.props.url, target: "_black"}, 
           this.props.children
         )
       )
@@ -419,16 +419,17 @@ var TopBar = React.createClass({displayName: 'TopBar',
     return {
       data: [
         {
+          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#how-it-works',
           name: 'Help',
           onClick:  function(event){
-            event.preventDefault();
+
 
           },
         },
         {
+          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#tileset-gen',
           name: 'About',
           onClick: function(event){
-            event.preventDefault();
 
           },
         }
@@ -445,7 +446,7 @@ var TopBar = React.createClass({displayName: 'TopBar',
 
     var menuItens = this.state.data.map(function(item, index) {
       return (
-        React.createElement(MenuItem, {handleOnClick: item.onClick, key: index}, 
+        React.createElement(MenuItem, {handleOnClick: item.onClick, url: item.url, key: index}, 
           item.name
         )
       );
