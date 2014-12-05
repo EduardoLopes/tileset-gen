@@ -146,9 +146,7 @@ var EditBar = React.createClass({displayName: 'EditBar',
           React.createElement("select", {ref: "type", name: "type", id: "type", value: defaultSelectValue, onChange: this.handleOnSelectChange}, 
             React.createElement("option", {value: "0"}, "1"), 
             React.createElement("option", {value: "1"}, "2"), 
-            React.createElement("option", {value: "2"}, "3"), 
-            React.createElement("option", {value: "3"}, "4 - wang-tiles"), 
-            React.createElement("option", {value: "4"}, "5 - wang-tiles-corner")
+            React.createElement("option", {value: "2"}, "3")
           )
         )
       )
@@ -185,17 +183,17 @@ tilesetTemplate[2] = {
   height: 2
 };
 
-tilesetTemplate[3] = {
-  map: [1, 4, 20, 21, 1, 7, 13, 14, 1, 4, 20, 21, 1, 2, 20, 9, 3, 4, 15, 16, 19, 19, 19, 22, 19, 13, 19, 20, 7, 10, 2, 3, 7, 8, 2, 15, 21, 22, 21, 22, 10, 7, 8, 9, 3, 4, 8, 21, 3, 2, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 16, 13, 21, 20, 9, 10, 14, 3, 14, 15, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0],
-  width: 10,
-  height: 2
-};
-
-tilesetTemplate[4] = {
-  map: [8, 9, 1, 9, 8, 9, 7, 9, 8, 9, 1, 9, 8, 9, 13, 9, 8, 4, 2, 3, 14, 15, 8, 9, 19, 15, 13, 15, 22, 15, 14, 22, 20, 21, 19, 20, 14, 15, 14, 15, 8, 4, 1, 2, 8, 10, 3, 4, 8, 16, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 19, 15, 7, 15, 14, 16, 14, 10, 19, 22, 19, 22, 0, 0, 0, 0, 0, 0, 0, 0],
-  width: 10,
-  height: 2
-};
+//tilesetTemplate[3] = {
+//  map: [1, 4, 20, 21, 1, 7, 13, 14, 1, 4, 20, 21, 1, 2, 20, 9, 3, 4, 15, 16, 19, 19, 19, 22, 19, 13, 19, 20, 7, 10, 2, 3, 7, 8, 2, 15, 21, 22, 21, 22, 10, 7, 8, 9, 3, 4, 8, 21, 3, 2, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 16, 13, 21, 20, 9, 10, 14, 3, 14, 15, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0],
+//  width: 10,
+//  height: 2
+//};
+//
+//tilesetTemplate[4] = {
+//  map: [8, 9, 1, 9, 8, 9, 7, 9, 8, 9, 1, 9, 8, 9, 13, 9, 8, 4, 2, 3, 14, 15, 8, 9, 19, 15, 13, 15, 22, 15, 14, 22, 20, 21, 19, 20, 14, 15, 14, 15, 8, 4, 1, 2, 8, 10, 3, 4, 8, 16, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 19, 15, 7, 15, 14, 16, 14, 10, 19, 22, 19, 22, 0, 0, 0, 0, 0, 0, 0, 0],
+//  width: 10,
+//  height: 2
+//};
 
 var MainCanvas = React.createClass({displayName: 'MainCanvas',
   ctx: null,

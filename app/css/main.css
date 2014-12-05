@@ -143,6 +143,7 @@ body{
 .tilesets-canvas{
   margin: 0 auto;
   display: block;
+  border: 1px solid #ccc;
 }
 
 #form-tilesize{
