@@ -172,7 +172,7 @@ tilesetTemplate[0] = {
 };
 
 tilesetTemplate[1] = {
-  map: [1, 2, 3, 2, 3, 4, 1, 4, 7, 14, 14, 8, 8, 10, 7, 10, 13, 14, 14, 8, 8, 16, 13, 16, 7, 8, 8, 8, 14, 10, 7, 10, 13, 8, 8, 8, 14, 16, 13, 16, 19, 20, 21, 20, 21, 22, 19, 22, 1, 2, 3, 2, 3, 4, 1, 4, 19, 20, 21, 20, 21, 22, 19, 22],
+  map: [9, 10, 11, 10, 11, 12, 9, 12, 13, 14, 15, 14, 15, 16, 13, 16, 17, 18, 19, 18, 19, 20, 17, 20, 13, 14, 15, 14, 15, 16, 13, 16, 17, 18, 19, 18, 19, 20, 17, 20, 21, 22, 23, 22, 23, 24, 21, 24, 9, 10, 11, 10, 11, 12, 9, 12, 21, 22, 23, 22, 23, 24, 21, 24],
   width: 4,
   height: 4
 };
@@ -205,8 +205,8 @@ var MainCanvas = React.createClass({displayName: 'MainCanvas',
 
   },
   drawTile: function(sprite, x, y, type){
-    var spriteY = type / 6 >> 0;
-    var spriteX = (type - spriteY * 6);
+    var spriteY = type / 4 >> 0;
+    var spriteX = (type - spriteY * 4);
 
     this.ctx.drawImage(
       sprite,
