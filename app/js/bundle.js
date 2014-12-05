@@ -12,7 +12,8 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
 
     return {
       tilesets: [],
-      selectedTileSet: null
+      selectedTileSet: null,
+      tileSize: 32
     };
 
   },
@@ -80,14 +81,19 @@ var TilesetGen = React.createClass({displayName: 'TilesetGen',
     this.setState({selectedTileSet: id});
 
   },
+  setTilesetSize: function(tileSize){
+
+    this.setState({tileSize: tileSize});
+
+  },
   render: function() {
 
     return (
       React.createElement("div", null, 
         React.createElement(TopBar, null), 
         React.createElement(TilesetBasesContainer, {selected: this.state.selectedTileSet, selectTileset: this.handleSelectTileset, tilesets: this.state.tilesets, onClose: this.onClose, handleTilesetUpload: this.handleTilesetUpload}), 
-        React.createElement(EditBar, {tilesets: this.state.tilesets, updateTileset: this.handleUpdateTileset, selected: this.state.selectedTileSet}), 
-        React.createElement(MainCanvas, {tilesets: this.state.tilesets})
+        React.createElement(EditBar, {setTilesetSize: this.setTilesetSize, tilesets: this.state.tilesets, updateTileset: this.handleUpdateTileset, selected: this.state.selectedTileSet}), 
+        React.createElement(MainCanvas, {tileSize: this.state.tileSize, tilesets: this.state.tilesets})
       )
     );
   }
@@ -106,6 +112,11 @@ var EditBar = React.createClass({displayName: 'EditBar',
   handleOnSelectChange: function(){
 
     this.props.updateTileset(this.props.selected, this.refs.type.getDOMNode().value);
+
+  },
+  handleTilesizeOnChange: function(){
+
+    this.props.setTilesetSize(this.refs.tilesize.getDOMNode().value);
 
   },
   render: function() {
@@ -130,7 +141,7 @@ var EditBar = React.createClass({displayName: 'EditBar',
 
     return (
       React.createElement("div", {className: "config"}, 
-        "Tilesize: ", React.createElement("input", {id: "form-tilesize", defaultValue: "32", type: "number", step: "8", min: "8", max: "256"}), 
+        "Tilesize: ", React.createElement("input", {ref: "tilesize", onChange: this.handleTilesizeOnChange, id: "form-tilesize", defaultValue: "32", type: "number", step: "8", min: "8", max: "256"}), 
         React.createElement("span", {className: className}, " Type:", 
           React.createElement("select", {ref: "type", name: "type", id: "type", value: defaultSelectValue, onChange: this.handleOnSelectChange}, 
             React.createElement("option", {value: "0"}, "1"), 
@@ -196,20 +207,19 @@ var MainCanvas = React.createClass({displayName: 'MainCanvas',
 
   },
   drawTile: function(sprite, x, y, type){
-    var tileSize = 32;
     var spriteY = type / 6 >> 0;
     var spriteX = (type - spriteY * 6);
 
     this.ctx.drawImage(
       sprite,
-      spriteX * (tileSize / 2),
-      spriteY * (tileSize / 2),
-      (tileSize / 2),
-      (tileSize / 2),
-      (x * (tileSize / 2)),
-      (y * (tileSize / 2)),
-      (tileSize / 2),
-      (tileSize / 2)
+      spriteX * (this.props.tileSize / 2),
+      spriteY * (this.props.tileSize / 2),
+      (this.props.tileSize / 2),
+      (this.props.tileSize / 2),
+      (x * (this.props.tileSize / 2)),
+      (y * (this.props.tileSize / 2)),
+      (this.props.tileSize / 2),
+      (this.props.tileSize / 2)
     );
 
   },
@@ -224,8 +234,8 @@ var MainCanvas = React.createClass({displayName: 'MainCanvas',
     var height = 0;
 
     for (var i = 0; i < this.props.tilesets.length; i++) {
-      width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * 32);
-      height += (tilesetTemplate[this.props.tilesets[i].type].height * 32);
+      width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tileSize);
+      height += (tilesetTemplate[this.props.tilesets[i].type].height * this.props.tileSize);
     }
 
     this.canvas.width = width;

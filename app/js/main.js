@@ -11,7 +11,8 @@ var TilesetGen = React.createClass({
 
     return {
       tilesets: [],
-      selectedTileSet: null
+      selectedTileSet: null,
+      tileSize: 32
     };
 
   },
@@ -79,14 +80,19 @@ var TilesetGen = React.createClass({
     this.setState({selectedTileSet: id});
 
   },
+  setTilesetSize: function(tileSize){
+
+    this.setState({tileSize: tileSize});
+
+  },
   render: function() {
 
     return (
       <div>
         <TopBar/>
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} onClose={this.onClose} handleTilesetUpload={this.handleTilesetUpload} />
-        <EditBar tilesets={this.state.tilesets} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
-        <MainCanvas tilesets={this.state.tilesets} />
+        <EditBar setTilesetSize={this.setTilesetSize} tilesets={this.state.tilesets} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
+        <MainCanvas tileSize={this.state.tileSize} tilesets={this.state.tilesets} />
       </div>
     );
   }
