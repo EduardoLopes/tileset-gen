@@ -37,9 +37,9 @@ var EditBar = React.createClass({
         Tilesize: <input ref='tilesize' onChange={this.handleTilesizeOnChange} id="form-tilesize" defaultValue="32" type="number" step="8" min="8" max="256"/>
         <span className={className}> Type:
           <select ref="type" name="type" id="type" value={defaultSelectValue} onChange={this.handleOnSelectChange}>
-            <option value="0">1</option>
+            <option value="0">1 - The Blob</option>
             <option value="1">2</option>
-            <option value="2">3</option>
+            <option value="2">3 - Bitwise</option>
           </select>
         </span>
       </div>

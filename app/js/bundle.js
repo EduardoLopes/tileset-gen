@@ -144,9 +144,9 @@ var EditBar = React.createClass({displayName: 'EditBar',
         "Tilesize: ", React.createElement("input", {ref: "tilesize", onChange: this.handleTilesizeOnChange, id: "form-tilesize", defaultValue: "32", type: "number", step: "8", min: "8", max: "256"}), 
         React.createElement("span", {className: className}, " Type:", 
           React.createElement("select", {ref: "type", name: "type", id: "type", value: defaultSelectValue, onChange: this.handleOnSelectChange}, 
-            React.createElement("option", {value: "0"}, "1"), 
+            React.createElement("option", {value: "0"}, "1 - The Blob"), 
             React.createElement("option", {value: "1"}, "2"), 
-            React.createElement("option", {value: "2"}, "3")
+            React.createElement("option", {value: "2"}, "3 - Bitwise")
           )
         )
       )
