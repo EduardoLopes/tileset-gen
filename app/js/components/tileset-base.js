@@ -1,6 +1,7 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var TilesetBase = React.createClass({
+var TilesetBase = createReactClass({
   onClose: function() {
 
     this.props.close(this.props.id);
@@ -8,7 +9,7 @@ var TilesetBase = React.createClass({
   },
   hanldeOnClick: function (event){
 
-    if(this.refs.remove.getDOMNode() != event.target)
+    if(this.refs.remove != event.target)
       this.props.select(this.props.id);
 
   },

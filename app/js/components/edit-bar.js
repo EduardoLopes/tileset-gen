@@ -1,15 +1,16 @@
 var React = require('react');
 var _ = require('lodash');
+var createReactClass = require('create-react-class');
 
-var EditBar = React.createClass({
+var EditBar = createReactClass({
   handleOnSelectChange: function(){
 
-    this.props.updateTileset(this.props.selected, this.refs.type.getDOMNode().value);
+    this.props.updateTileset(this.props.selected, this.refs.type.value);
 
   },
   handleTilesizeOnChange: function(){
 
-    this.props.setTilesetSize(this.refs.tilesize.getDOMNode().value);
+    this.props.setTilesetSize(this.refs.tilesize.value);
 
   },
   render: function() {

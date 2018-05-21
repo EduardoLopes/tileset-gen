@@ -4,24 +4,24 @@
   "description": "project description",
   "author": "",
   "devDependencies": {
-    "browserify": "^10.2.6",
+    "browserify": "^16.2.2",
     "browserify-shim": "^3.8.9",
     "event-stream": "^3.3.1",
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.0",
-    "gulp-cssmin": "^0.1.7",
+    "gulp-cssmin": "^0.2.0",
     "gulp-htmlbuild": "^0.4.1",
     "gulp-livereload": "^3.8.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
+    "gulp-uglify": "^3.0.0",
     "gulp-uncss": "^1.0.2",
     "gulp-util": "^3.0.6",
     "gulp-webserver": "^0.9.1",
     "reactify": "^1.1.1",
-    "require-dir": "^0.3.0",
-    "run-sequence": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0",
+    "require-dir": "^1.0.0",
+    "run-sequence": "^2.2.1",
+    "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.2.3"
   },
   "browserify": {
@@ -34,6 +34,9 @@
     "./app/js/vendor/canvas-toBlob.js": "canvas-to-blob"
   },
   "dependencies": {
-    "lodash": "^2.4.1"
+    "create-react-class": "^15.6.3",
+    "lodash": "^4.17.10",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }

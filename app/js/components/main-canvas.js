@@ -2,6 +2,7 @@ var React = require('react');
 var Blob = require('../vendor/Blob.js');
 var canvasToBlob = require('../vendor/canvasToBlob.js');
 var saveAs = require('../vendor/FileSaver.js');
+var createReactClass = require('create-react-class');
 
 var tilesetTemplate = [];
 
@@ -36,7 +37,7 @@ tilesetTemplate[2] = {
 //  height: 2
 //};
 
-var MainCanvas = React.createClass({
+var MainCanvas = createReactClass({
   ctx: null,
   download: function(){
 
@@ -64,7 +65,7 @@ var MainCanvas = React.createClass({
   },
   componentDidMount: function() {
 
-    this.canvas = this.refs.tilesets.getDOMNode();
+    this.canvas = this.refs.tilesets;
     this.ctx = this.canvas.getContext('2d');
 
   },

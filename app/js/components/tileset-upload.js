@@ -1,4 +1,5 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 function clearFileInput(fileInput) {
   try {
@@ -9,10 +10,10 @@ function clearFileInput(fileInput) {
   }
 }
 
-var TilesetUpload = React.createClass({
+var TilesetUpload = createReactClass({
   handleAddClick: function(){
 
-    this.refs.input.getDOMNode().click();
+    this.refs.input.click();
 
   },
 

@@ -1,6 +1,7 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var MenuItem = React.createClass({
+var MenuItem = createReactClass({
   render: function() {
     return (
       <li className="item">

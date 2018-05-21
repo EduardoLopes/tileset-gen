@@ -1,11 +1,13 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var _ = require('lodash');
 var TopBar = require('./components/top-bar.js');
 var TilesetBasesContainer = require('./components/tileset-bases-container.js');
 var MainCanvas = require('./components/main-canvas.js');
 var EditBar = require('./components/edit-bar.js');
+var createReactClass = require('create-react-class');
 
-var TilesetGen = React.createClass({
+var TilesetGen = createReactClass({
   currentID: 0,
   getInitialState: function() {
 
@@ -98,7 +100,7 @@ var TilesetGen = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   <TilesetGen />,
   document.getElementById('container')
 );

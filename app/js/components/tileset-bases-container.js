@@ -1,8 +1,9 @@
 var React = require('react');
 var TilesetBase = require('./tileset-base.js');
 var TilesetUpload = require('./tileset-upload.js');
+var createReactClass = require('create-react-class');
 
-var TilesetBaseContainer = React.createClass({
+var TilesetBaseContainer = createReactClass({
 
   render: function() {
 

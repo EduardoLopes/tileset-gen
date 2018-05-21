@@ -1,7 +1,8 @@
 var React = require('react');
 var MenuItem = require('./menu-item.js');
+var createReactClass = require('create-react-class');
 
-var TopBar = React.createClass({
+var TopBar = createReactClass({
   getInitialState: function() {
 
     return {
