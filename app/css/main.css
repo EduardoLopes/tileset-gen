@@ -38,6 +38,7 @@ body{
   padding: 0;
   float: right;
   margin-right: 30px;
+  list-style: none;
 }
 
 .top-bar .menu .item{
