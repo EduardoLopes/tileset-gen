@@ -3,9 +3,10 @@
   "version": "0.1.1",
   "description": "project description",
   "author": "",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.3"
+  },
   "dependencies": {
-    "create-react-class": "^15.6.3",
     "lodash": "^4.17.10",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"

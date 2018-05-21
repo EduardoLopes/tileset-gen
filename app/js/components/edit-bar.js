@@ -1,19 +1,21 @@
 var React = require('react');
 var _ = require('lodash');
-var createReactClass = require('create-react-class');
 
-var EditBar = createReactClass({
-  handleOnSelectChange: function(){
+class EditBar extends React.Component {
+
+  handleOnSelectChange(){
 
     this.props.updateTileset(this.props.selected, this.refs.type.value);
 
-  },
-  handleTilesizeOnChange: function(){
+  }
+
+  handleTilesizeOnChange(){
 
     this.props.setTilesetSize(this.refs.tilesize.value);
 
-  },
-  render: function() {
+  }
+
+  render() {
     var className;
     var defaultSelectValue = 0;
 
@@ -45,7 +47,9 @@ var EditBar = createReactClass({
         </span>
       </div>
     );
+
   }
-});
+
+}
 
 module.exports = EditBar;

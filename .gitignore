@@ -122,3 +122,4 @@ dist
 .tmp
 /app/js/bundle.js
 .cache/
+package-lock.json

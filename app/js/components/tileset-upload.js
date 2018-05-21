@@ -10,22 +10,23 @@ function clearFileInput(fileInput) {
   }
 }
 
-var TilesetUpload = createReactClass({
-  handleAddClick: function(){
+class TilesetUpload extends React.Component{
+
+  handleAddClick(){
 
     this.refs.input.click();
 
-  },
+  }
 
-  handleOnChange: function(event){
+  handleOnChange(event){
 
     this.props.onTilesetUpload(event.target.files[0]);
 
     clearFileInput(event.target);
 
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="base add" onClick={this.handleAddClick}>
         Add a new tileset base
@@ -33,6 +34,7 @@ var TilesetUpload = createReactClass({
       </div>
     );
   }
-});
+
+}
 
 module.exports = TilesetUpload;

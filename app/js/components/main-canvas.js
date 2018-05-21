@@ -2,7 +2,6 @@ var React = require('react');
 var Blob = require('../vendor/Blob.js');
 var canvasToBlob = require('../vendor/canvasToBlob.js');
 var saveAs = require('../vendor/FileSaver.js');
-var createReactClass = require('create-react-class');
 
 var tilesetTemplate = [];
 
@@ -37,16 +36,17 @@ tilesetTemplate[2] = {
 //  height: 2
 //};
 
-var MainCanvas = createReactClass({
-  ctx: null,
-  download: function(){
+class MainCanvas extends React.Component {
+
+  download(){
 
     this.canvas.toBlob(function(blob) {
       saveAs(blob, "tileset.png");
     });
 
-  },
-  drawTile: function(sprite, x, y, type){
+  }
+
+  drawTile(sprite, x, y, type){
     var spriteY = type / 4 >> 0;
     var spriteX = (type - spriteY * 4);
 
@@ -62,14 +62,16 @@ var MainCanvas = createReactClass({
       (this.props.tileSize / 2)
     );
 
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
 
     this.canvas = this.refs.tilesets;
     this.ctx = this.canvas.getContext('2d');
 
-  },
-  setCanvasSize: function(){
+  }
+
+  setCanvasSize(){
     var width = 0;
     var height = 0;
 
@@ -82,8 +84,9 @@ var MainCanvas = createReactClass({
     this.canvas.height = height;
 
 
-  },
-  generateTileset: function(){
+  }
+
+  generateTileset(){
     var height = 0;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -106,8 +109,9 @@ var MainCanvas = createReactClass({
 
     };
 
-  },
-  render: function() {
+  }
+
+  render() {
 
     if(this.ctx && this.props.tilesets.length > 0)
       this.generateTileset();
@@ -121,6 +125,7 @@ var MainCanvas = createReactClass({
       </div>
     );
   }
-});
+
+}
 
 module.exports = MainCanvas;

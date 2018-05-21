@@ -1,11 +1,10 @@
 var React = require('react');
 var TilesetBase = require('./tileset-base.js');
 var TilesetUpload = require('./tileset-upload.js');
-var createReactClass = require('create-react-class');
 
-var TilesetBaseContainer = createReactClass({
+class TilesetBaseContainer extends React.Component {
 
-  render: function() {
+  render() {
 
     var tilesetItens = this.props.tilesets.map(function(tileset, index) {
       var selected = false;
@@ -29,6 +28,6 @@ var TilesetBaseContainer = createReactClass({
 
   }
 
-});
+}
 
 module.exports = TilesetBaseContainer;

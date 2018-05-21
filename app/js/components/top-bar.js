@@ -1,11 +1,13 @@
 var React = require('react');
 var MenuItem = require('./menu-item.js');
-var createReactClass = require('create-react-class');
 
-var TopBar = createReactClass({
-  getInitialState: function() {
+class TopBar extends React.Component{
 
-    return {
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
       data: [
         {
           url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#how-it-works',
@@ -25,13 +27,9 @@ var TopBar = createReactClass({
       ]
     };
 
-  },
-  componentDidMount: function() {
+  }
 
-  },
-
-
-  render: function() {
+  render() {
 
     var menuItens = this.state.data.map(function(item, index) {
       return (
@@ -51,6 +49,7 @@ var TopBar = createReactClass({
       </nav>
     );
   }
-});
+
+}
 
 module.exports = TopBar;

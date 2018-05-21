@@ -1,19 +1,21 @@
 var React = require('react');
-var createReactClass = require('create-react-class');
 
-var TilesetBase = createReactClass({
-  onClose: function() {
+class TilesetBase extends React.Component {
+
+  onClose() {
 
     this.props.close(this.props.id);
 
-  },
-  hanldeOnClick: function (event){
+  }
+
+  hanldeOnClick(event){
 
     if(this.refs.remove != event.target)
       this.props.select(this.props.id);
 
-  },
-  render: function() {
+  }
+
+  render () {
     var classNane;
 
     if(this.props.selected){
@@ -29,6 +31,7 @@ var TilesetBase = createReactClass({
       </div>
     );
   }
-});
+
+}
 
 module.exports = TilesetBase;
