@@ -6,11 +6,13 @@ class TilesetBase extends React.Component {
 
     this.props.close(this.props.id);
 
+    this.removeRef = React.createRef();
+
   }
 
   hanldeOnClick(event){
 
-    if(this.refs.remove != event.target)
+    if(this.removeRef != event.target)
       this.props.select(this.props.id);
 
   }
@@ -25,8 +27,8 @@ class TilesetBase extends React.Component {
     }
 
     return (
-      <div onClick={this.hanldeOnClick} className={classNane}>
-        <div ref="remove" onClick={this.onClose} className="remove">x</div>
+      <div onClick={this.hanldeOnClick.bind(this)} className={classNane}>
+        <div ref={this.removeRef} onClick={this.onClose.bind(this)} className="remove">x</div>
         <img src={this.props.dataUri} />
       </div>
     );

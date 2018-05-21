@@ -38,6 +38,14 @@ tilesetTemplate[2] = {
 
 class MainCanvas extends React.Component {
 
+  constructor(props){
+
+    super(props);
+
+    this.canvasRef = React.createRef();
+
+  }
+
   download(){
 
     this.canvas.toBlob(function(blob) {
@@ -66,7 +74,7 @@ class MainCanvas extends React.Component {
 
   componentDidMount() {
 
-    this.canvas = this.refs.tilesets;
+    this.canvas = this.canvasRef.current;
     this.ctx = this.canvas.getContext('2d');
 
   }
@@ -120,8 +128,8 @@ class MainCanvas extends React.Component {
 
     return (
       <div className="tilesets-container">
-        <canvas className="tilesets-canvas" ref="tilesets"></canvas>
-        <button onClick={this.download} className="download">Download</button>
+        <canvas className="tilesets-canvas" ref={this.canvasRef}></canvas>
+        <button onClick={this.download.bind(this)} className="download">Download</button>
       </div>
     );
   }

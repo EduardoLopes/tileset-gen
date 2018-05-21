@@ -12,9 +12,17 @@ function clearFileInput(fileInput) {
 
 class TilesetUpload extends React.Component{
 
+  constructor(props) {
+
+    super(props);
+
+    this.inputRef = React.createRef();
+
+  }
+
   handleAddClick(){
 
-    this.refs.input.click();
+    this.inputRef.current.click();
 
   }
 
@@ -28,9 +36,9 @@ class TilesetUpload extends React.Component{
 
   render() {
     return (
-      <div className="base add" onClick={this.handleAddClick}>
+      <div className="base add" onClick={this.handleAddClick.bind(this)}>
         Add a new tileset base
-        <input ref="input" type="file" accept="image/*" className="file-input" onChange={this.handleOnChange} />
+        <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange.bind(this)} />
       </div>
     );
   }
