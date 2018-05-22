@@ -9,12 +9,6 @@ class EditBar extends React.Component {
 
   }
 
-  handleTilesizeOnChange(){
-
-    this.props.setTilesetSize(this.refs.tilesize.value);
-
-  }
-
   render() {
     var className;
     var defaultSelectValue = 0;
@@ -37,7 +31,6 @@ class EditBar extends React.Component {
 
     return (
       <div className="config">
-        Tilesize: <input ref='tilesize' onChange={this.handleTilesizeOnChange} id="form-tilesize" defaultValue="32" type="number" step="8" min="8" max="256"/>
         <span className={className}> Type:
           <select ref="type" name="type" id="type" value={defaultSelectValue} onChange={this.handleOnSelectChange.bind(this)}>
             <option value="0">1 - The Blob</option>

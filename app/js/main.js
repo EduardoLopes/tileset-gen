@@ -13,8 +13,7 @@ var TilesetGen = createReactClass({
 
     return {
       tilesets: [],
-      selectedTileSet: null,
-      tileSize: 32
+      selectedTileSet: null
     };
 
   },
@@ -33,14 +32,22 @@ var TilesetGen = createReactClass({
         var img = document.createElement('img');
         img.src = dataUri;
 
-        tilesets.unshift({
-          uri: dataUri,
-          img: img,
-          id: this.currentID++,
-          type: 0
-        });
+        img.onload = function(){
 
-        this.setState({tilesets: tilesets});
+          console.log(img.naturalWidth / 2);
+
+          tilesets.unshift({
+            uri: dataUri,
+            img: img,
+            id: this.currentID++,
+            type: 0,
+            tileSize: img.naturalWidth / 2
+          });
+
+          this.setState({tilesets: tilesets});
+
+        }.bind(this);
+
 
       }.bind(this);
 
@@ -82,19 +89,14 @@ var TilesetGen = createReactClass({
     this.setState({selectedTileSet: id});
 
   },
-  setTilesetSize: function(tileSize){
-
-    this.setState({tileSize: tileSize});
-
-  },
   render: function() {
 
     return (
       <div>
         <TopBar/>
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} onClose={this.onClose} handleTilesetUpload={this.handleTilesetUpload} />
-        <EditBar setTilesetSize={this.setTilesetSize} tilesets={this.state.tilesets} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
-        <MainCanvas tileSize={this.state.tileSize} tilesets={this.state.tilesets} />
+        <EditBar tilesets={this.state.tilesets} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
+        <MainCanvas tilesets={this.state.tilesets} />
       </div>
     );
   }

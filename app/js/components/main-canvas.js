@@ -54,20 +54,21 @@ class MainCanvas extends React.Component {
 
   }
 
-  drawTile(sprite, x, y, type){
+  drawTile(sprite, x, y, type, tileSize){
+
     var spriteY = type / 4 >> 0;
     var spriteX = (type - spriteY * 4);
 
     this.ctx.drawImage(
       sprite,
-      spriteX * (this.props.tileSize / 2),
-      spriteY * (this.props.tileSize / 2),
-      (this.props.tileSize / 2),
-      (this.props.tileSize / 2),
-      (x * (this.props.tileSize / 2)),
-      (y * (this.props.tileSize / 2)),
-      (this.props.tileSize / 2),
-      (this.props.tileSize / 2)
+      spriteX * (tileSize / 2),
+      spriteY * (tileSize / 2),
+      (tileSize / 2),
+      (tileSize / 2),
+      (x * (tileSize / 2)),
+      (y),
+      (tileSize / 2),
+      (tileSize / 2)
     );
 
   }
@@ -84,8 +85,8 @@ class MainCanvas extends React.Component {
     var height = 0;
 
     for (var i = 0; i < this.props.tilesets.length; i++) {
-      width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tileSize);
-      height += (tilesetTemplate[this.props.tilesets[i].type].height * this.props.tileSize);
+      width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tilesets[i].tileSize);
+      height += (tilesetTemplate[this.props.tilesets[i].type].height * this.props.tilesets[i].tileSize);
     }
 
     this.canvas.width = width;
@@ -104,15 +105,24 @@ class MainCanvas extends React.Component {
 
     for (i = 0; i < this.props.tilesets.length; i++) {
 
+
       for (h = 0; h < tilesetTemplate[this.props.tilesets[i].type].height * 2; h++) {
 
         for (w = 0; w < tilesetTemplate[this.props.tilesets[i].type].width * 2; w++) {
 
-          this.drawTile(this.props.tilesets[i].img, w, height + (0 * (tilesetTemplate[this.props.tilesets[i].type].height * 2)), tilesetTemplate[this.props.tilesets[i].type].map[(tilesetTemplate[this.props.tilesets[i].type].width * 2) * h + w] - 1);
+          this.drawTile(
+            this.props.tilesets[i].img, //sprite
+            w, //x
+            height, //y
+            tilesetTemplate[this.props.tilesets[i].type].map[(tilesetTemplate[this.props.tilesets[i].type].width * 2) * h + w] - 1, //type
+            this.props.tilesets[i].tileSize //tileSize
+          );
 
         }
 
-        height +=1;
+        console.log(0 * (tilesetTemplate[this.props.tilesets[i].type].height * 2));
+
+        height += this.props.tilesets[i].tileSize / 2;
       }
 
     };
