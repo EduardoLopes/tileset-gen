@@ -34,8 +34,6 @@ var TilesetGen = createReactClass({
 
         img.onload = function(){
 
-          console.log(img.naturalWidth / 2);
-
           tilesets.unshift({
             uri: dataUri,
             img: img,

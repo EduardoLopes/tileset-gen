@@ -28,7 +28,9 @@ class TilesetUpload extends React.Component{
 
   handleOnChange(event){
 
-    this.props.onTilesetUpload(event.target.files[0]);
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.props.onTilesetUpload(event.target.files[i]);
+    }
 
     clearFileInput(event.target);
 
@@ -38,7 +40,7 @@ class TilesetUpload extends React.Component{
     return (
       <div className="base add" onClick={this.handleAddClick.bind(this)}>
         Add a new tileset base
-        <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange.bind(this)} />
+        <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange.bind(this)} required multiple />
       </div>
     );
   }

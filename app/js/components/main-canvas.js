@@ -120,8 +120,6 @@ class MainCanvas extends React.Component {
 
         }
 
-        console.log(0 * (tilesetTemplate[this.props.tilesets[i].type].height * 2));
-
         height += this.props.tilesets[i].tileSize / 2;
       }
 
