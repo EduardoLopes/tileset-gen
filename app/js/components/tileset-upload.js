@@ -1,5 +1,4 @@
 var React = require('react');
-var createReactClass = require('create-react-class');
 
 function clearFileInput(fileInput) {
   try {
@@ -17,6 +16,8 @@ class TilesetUpload extends React.Component{
     super(props);
 
     this.inputRef = React.createRef();
+
+    this.handleOnChange = this.handleOnChange.bind(this);
 
   }
 
@@ -40,7 +41,7 @@ class TilesetUpload extends React.Component{
     return (
       <div className="base add" onClick={this.handleAddClick.bind(this)}>
         Add a new tileset base
-        <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange.bind(this)} required multiple />
+        <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange} required multiple />
       </div>
     );
   }

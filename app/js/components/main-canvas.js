@@ -56,8 +56,10 @@ class MainCanvas extends React.Component {
 
     for (var i = 0; i < this.props.tilesets.length; i++) {
       width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tilesets[i].tileSize);
-      height += (tilesetTemplate[this.props.tilesets[i].type].height * this.props.tilesets[i].tileSize);
+      //height += Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tilesets[i].tileSize);
     }
+
+    height = this.props.tilesets[this.props.tilesets.length - 1].y + this.props.tilesets[this.props.tilesets.length - 1].height;
 
     this.canvas.width = width;
     this.canvas.height = height;
