@@ -19,14 +19,8 @@ class EditBar extends React.Component {
       className = '';
     }
 
-    var index = _.findIndex(this.props.tilesets, function(tileset) {
-
-      return tileset.id == this.props.selected;
-
-    }.bind(this));
-
-    if(this.props.selected != null && index > -1){
-      defaultSelectValue = this.props.tilesets[index].type;
+    if(this.props.selected != null && this.props.selected > -1){
+      defaultSelectValue = this.props.tilesets[this.props.selected].type;
     }
 
     return (

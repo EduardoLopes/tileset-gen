@@ -26,6 +26,9 @@ class TilesetGen extends React.Component{
     this.handleUpdateTileset = this.handleUpdateTileset.bind(this);
     this.handleSelectTileset = this.handleSelectTileset.bind(this);
 
+    this.lastHeight = 0;
+    this.lastY = 0;
+
   }
 
   handleTilesetUpload(file){
@@ -51,15 +54,15 @@ class TilesetGen extends React.Component{
 
           if(tilesets.length === 1){
 
-            y = tilesets[tilesets.length - 1].height;
+            y = this.lastHeight;
 
           } else if(tilesets.length >= 1){
 
-            y = tilesets[tilesets.length - 1].y + tilesets[tilesets.length - 1].height;
+            y = this.lastY + this.lastHeight;
 
           }
 
-          tilesets.push({
+          tilesets[ID] = {
             uri: dataUri,
             img: img,
             id: ID,
@@ -69,7 +72,11 @@ class TilesetGen extends React.Component{
             y: y,
             width: 0,
             height: tilesetTemplate[0].height * (img.naturalWidth / 2)
-          });
+          };
+
+          this.lastHeight = tilesets[ID].height;
+          this.lastY = y;
+
 
           this.setState({tilesets: tilesets});
 
@@ -84,41 +91,39 @@ class TilesetGen extends React.Component{
 
   recalcYPosition(tilesets){
 
-    var y = 0;
+    var y = 0, height = 0, lastY = 0;
 
-    for (var i = 0; i < tilesets.length; i++) {
+    tilesets.forEach(function(tileset){
 
       y = 0;
 
       if(tilesets.length === 1){
 
-        if(typeof tilesets[i - 1] !== "undefined"){
-
-          y = tilesets[i - 1].height;
-
-        }
+        y = height;
 
       } else if(tilesets.length > 1){
 
-        if(typeof tilesets[i - 1] !== "undefined"){
-          y = tilesets[i - 1].y + tilesets[i - 1].height;
-        }
+        y = lastY + height;
 
       }
 
-      tilesets[i].y = y;
+      lastY = y;
+      tileset.y = y;
+      height = tileset.height;
 
-    }
+      this.lastHeight = tileset.height;
+
+    });
 
   }
 
   onClose(id){
 
-    var newTilesets = _.remove(this.state.tilesets, function(tileset) { return tileset.id != id; });
+    _.pullAt(this.state.tilesets, [id]);
 
-    this.recalcYPosition(newTilesets);
+    this.recalcYPosition(this.state.tilesets);
 
-    this.setState({tilesets: newTilesets});
+    this.setState({tilesets: this.state.tilesets});
 
     if(this.state.selectedTileSet == id){
       this.setState({selectedTileSet: null});
@@ -130,11 +135,8 @@ class TilesetGen extends React.Component{
 
     var tilesets = this.state.tilesets, y = 0;
 
-    var index = _.findIndex(this.state.tilesets, function(tileset) { return tileset.id == id; });
-
-    tilesets[index].type = +type;
-
-    tilesets[index].height = tilesetTemplate[tilesets[index].type].height * tilesets[index].tileSize;
+    tilesets[id].type = +type;
+    tilesets[id].height = tilesetTemplate[tilesets[id].type].height * tilesets[id].tileSize;
 
     this.recalcYPosition(tilesets);
 
