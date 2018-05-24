@@ -7,6 +7,8 @@ var MainCanvas = require('./components/main-canvas.js');
 var EditBar = require('./components/edit-bar.js');
 var createReactClass = require('create-react-class');
 
+var tilesetTemplate = require('./template.js');
+
 var TilesetGen = createReactClass({
   currentID: 0,
   getInitialState: function() {
@@ -34,12 +36,30 @@ var TilesetGen = createReactClass({
 
         img.onload = function(){
 
-          tilesets.unshift({
+          var ID = this.currentID++;
+
+          var y = 0;
+
+          if(tilesets.length === 1){
+
+            y = tilesets[tilesets.length - 1].height;
+
+          } else if(tilesets.length >= 1){
+
+            y = tilesets[tilesets.length - 1].y + tilesets[tilesets.length - 1].height;
+
+          }
+
+          tilesets.push({
             uri: dataUri,
             img: img,
-            id: this.currentID++,
+            id: ID,
             type: 0,
-            tileSize: img.naturalWidth / 2
+            tileSize: img.naturalWidth / 2,
+            x: 0,
+            y: y,
+            width: 0,
+            height: tilesetTemplate[0].height * (img.naturalWidth / 2)
           });
 
           this.setState({tilesets: tilesets});
@@ -73,6 +93,7 @@ var TilesetGen = createReactClass({
     });
 
     tilesets[index].type = +type;
+    tilesets[index].y = ((tilesetTemplate[0].height * 2) * ID) * tilesets[index].tileSize;
     this.setState({tilesets: tilesets});
 
   },

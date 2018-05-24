@@ -34,7 +34,7 @@ class MainCanvas extends React.Component {
       spriteY * (tileSize / 2),
       (tileSize / 2),
       (tileSize / 2),
-      (x * (tileSize / 2)),
+      (x),
       (y),
       (tileSize / 2),
       (tileSize / 2)
@@ -50,6 +50,7 @@ class MainCanvas extends React.Component {
   }
 
   setCanvasSize(){
+
     var width = 0;
     var height = 0;
 
@@ -61,11 +62,10 @@ class MainCanvas extends React.Component {
     this.canvas.width = width;
     this.canvas.height = height;
 
-
   }
 
   generateTileset(){
-    var height = 0;
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     var h = 0, w = 0, i = 0;
@@ -81,15 +81,14 @@ class MainCanvas extends React.Component {
 
           this.drawTile(
             this.props.tilesets[i].img, //sprite
-            w, //x
-            height, //y
+            this.props.tilesets[i].x + (w * (this.props.tilesets[i].tileSize / 2)), //x
+            this.props.tilesets[i].y + (h * (this.props.tilesets[i].tileSize / 2)), //y
             tilesetTemplate[this.props.tilesets[i].type].map[(tilesetTemplate[this.props.tilesets[i].type].width * 2) * h + w] - 1, //type
             this.props.tilesets[i].tileSize //tileSize
           );
 
         }
 
-        height += this.props.tilesets[i].tileSize / 2;
       }
 
     };
