@@ -1,14 +1,16 @@
 {
-  "name": "project-name",
+  "name": "tileset-gen",
   "version": "0.1.1",
-  "description": "project description",
-  "author": "",
+  "description": "A tileset generator",
+  "author": "“Eduardo <EduardoLopesDS@gmail.com> (http://square64.tumblr.com/)",
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "autoprefixer": "^8.5.0",
+    "babel-core": "^6.26.3",
+    "lost": "^8.2.1"
   },
   "dependencies": {
     "lodash": "^4.17.10",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }
