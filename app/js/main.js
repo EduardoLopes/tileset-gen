@@ -132,19 +132,11 @@ class TilesetGen extends React.Component{
 
     var index = _.findIndex(this.state.tilesets, function(tileset) { return tileset.id == id; });
 
-    if(tilesets.length === 1){
-
-      y = tilesets[index - 1].height;
-
-    } else if(tilesets.length >= 1){
-
-      y = tilesets[index - 1].y + tilesets[index - 1].height;
-
-    }
-
     tilesets[index].type = +type;
-    tilesets[index].y = y;
 
+    tilesets[index].height = tilesetTemplate[tilesets[index].type].height * tilesets[index].tileSize;
+
+    this.recalcYPosition(tilesets);
 
     this.setState({tilesets: tilesets});
 
