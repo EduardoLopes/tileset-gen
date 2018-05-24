@@ -92,7 +92,11 @@ class TilesetGen extends React.Component{
 
       if(tilesets.length === 1){
 
-        y = tilesets[i - 1].height;
+        if(typeof tilesets[i - 1] !== "undefined"){
+
+          y = tilesets[i - 1].height;
+
+        }
 
       } else if(tilesets.length > 1){
 
