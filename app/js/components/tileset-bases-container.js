@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('lodash');
 var TilesetBase = require('./tileset-base.js');
 var TilesetUpload = require('./tileset-upload.js');
 
@@ -9,7 +10,7 @@ class TilesetBaseContainer extends React.Component {
     var tilesetItens = this.props.tilesets.map(function(tileset, index) {
       var selected = false;
 
-      if(this.props.selected == tileset.id){
+      if(_.indexOf(this.props.selected, tileset.id) > -1){
         selected = true;
       }
 

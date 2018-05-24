@@ -18,7 +18,7 @@ class TilesetGen extends React.Component{
 
     this.state = {
       tilesets: [],
-      selectedTileSet: null
+      selectedTileSet: []
     };
 
     this.handleTilesetUpload = this.handleTilesetUpload.bind(this);
@@ -123,11 +123,12 @@ class TilesetGen extends React.Component{
 
     this.recalcYPosition(this.state.tilesets);
 
-    this.setState({tilesets: this.state.tilesets});
+    _.pull(this.state.selectedTileSet, id);
 
-    if(this.state.selectedTileSet == id){
-      this.setState({selectedTileSet: null});
-    }
+    this.setState({
+      tilesets: this.state.tilesets,
+      selectedTileSet: this.state.selectedTileSet
+    });
 
   }
 
@@ -146,13 +147,17 @@ class TilesetGen extends React.Component{
 
   handleSelectTileset(id){
 
-    if(this.state.selectedTileSet == id){
-      this.setState({selectedTileSet: null});
+    if(_.indexOf(this.state.selectedTileSet, id) <= -1){
 
-      return false;
+      this.state.selectedTileSet.push(id);
+
+    } else {
+
+      _.pull(this.state.selectedTileSet, id);
+
     }
 
-    this.setState({selectedTileSet: id});
+    this.setState({selectedTileSet: this.state.selectedTileSet});
 
   }
 
