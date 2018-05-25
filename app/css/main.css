@@ -69,7 +69,7 @@ body{
 .tileset-bases .base{
   padding: 15px;
   border-right: 1px solid #ccc;
-  display: inline-block;
+  display: table-cell;
   text-align: center;
   line-height: 80px;
   color: #AFAFAF;
