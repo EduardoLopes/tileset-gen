@@ -111,9 +111,10 @@ class TilesetGen extends React.Component{
       tileset.y = y;
       height = tileset.height;
 
-      this.lastHeight = tileset.height;
-
     });
+
+    this.lastHeight = height;
+    this.lastY = y;
 
   }
 
