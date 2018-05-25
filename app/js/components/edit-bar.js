@@ -70,6 +70,7 @@ class EditBar extends React.Component {
                 <option value="0">1 - The Blob</option>
                 <option value="1">2</option>
                 <option value="2">3 - Bitwise</option>
+                <option value="3">4</option>
               </select>
 
             </li>
