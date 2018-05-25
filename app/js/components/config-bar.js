@@ -1,11 +1,25 @@
 var React = require('react');
 var MenuItem = require('./menu-item.js');
 
+
+function clearFileInput(fileInput) {
+  try {
+    fileInput.value = null;
+  } catch(ex) { }
+  if (fileInput.value) {
+    fileInput.parentNode.replaceChild(fileInput.cloneNode(true), fileInput);
+  }
+}
+
 class ConfigBar extends React.Component{
 
   constructor(props) {
 
     super(props);
+
+    this.inputRef = React.createRef();
+    this.handleOnChange = this.handleOnChange.bind(this);
+
 
     this.state = {
       data: [
@@ -19,9 +33,30 @@ class ConfigBar extends React.Component{
             this.props.selectAll();
 
           }.bind(this),
+        },
+        {
+          url: '#',
+          name: 'Upload',
+          onClick:  function(event){
+
+            event.preventDefault();
+
+            this.inputRef.current.click();
+
+          }.bind(this),
         }
       ]
     };
+
+  }
+
+  handleOnChange(event){
+
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.props.onTilesetUpload(event.target.files[i]);
+    }
+
+    clearFileInput(event.target);
 
   }
 
@@ -40,6 +75,7 @@ class ConfigBar extends React.Component{
       <nav className="config-bar clearfix">
         <ul className="menu">
           {menuItens}
+          <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange} required multiple />
         </ul>
       </nav>
     );

@@ -187,8 +187,8 @@ class TilesetGen extends React.Component{
     return (
       <div>
         <TopBar/>
-        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet}/>
-        <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} handleTilesetUpload={this.handleTilesetUpload} />
+        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} />
+        <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} />
         <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
         <MainCanvas tilesets={this.state.tilesets} />
       </div>

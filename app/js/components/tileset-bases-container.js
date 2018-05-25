@@ -24,7 +24,6 @@ class TilesetBaseContainer extends React.Component {
     return (
       <div className="tileset-bases">
         {tilesetItens}
-        <TilesetUpload onTilesetUpload={this.props.handleTilesetUpload} />
       </div>
     );
 

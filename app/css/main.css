@@ -95,6 +95,7 @@ body{
   overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
+  min-height: 130px;
 }
 
 .tileset-bases {
