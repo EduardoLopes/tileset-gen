@@ -30,12 +30,9 @@ class EditBar extends React.Component {
 
       var allTheSame = true;
 
-      console.log(this.props.tilesets);
-      console.log(this.props.selected.length);
-
       for (var i = 0; i < this.props.selected.length; i++) {
 
-        if(this.props.tilesets[this.props.selected[i]].type != this.props.tilesets[this.props.selected[0]].type){
+        if(this.props.tilesets.get(this.props.selected[i]).type != this.props.tilesets.get(this.props.selected[0]).type){
 
           allTheSame = false;
 
@@ -44,11 +41,11 @@ class EditBar extends React.Component {
       }
 
       if(this.props.selected != null && this.props.selected > -1){
-        defaultSelectValue = this.props.tilesets[this.props.selected[0]].type;
+        defaultSelectValue = this.props.tilesets.get(this.props.selected[0]).type;
       } else {
 
         if(allTheSame == true){
-          defaultSelectValue = this.props.tilesets[this.props.selected[0]].type;
+          defaultSelectValue = this.props.tilesets.get(this.props.selected[0]).type;
         } else {
           defaultSelectValue = -1;
         }

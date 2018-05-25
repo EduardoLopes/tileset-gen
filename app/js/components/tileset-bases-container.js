@@ -7,18 +7,19 @@ class TilesetBaseContainer extends React.Component {
 
   render() {
 
-    var tilesetItens = this.props.tilesets.map(function(tileset, index) {
+    var tilesetItens = [];
+
+    for(var tileset of this.props.tilesets.values()) {
+
       var selected = false;
 
       if(_.indexOf(this.props.selected, tileset.id) > -1){
         selected = true;
       }
 
-      return (
-        <TilesetBase selected={selected} select={this.props.selectTileset} close={this.props.onClose} dataUri={tileset.uri} id={tileset.id} key={index} />
-      );
+      tilesetItens.push(<TilesetBase selected={selected} select={this.props.selectTileset} close={this.props.onClose} dataUri={tileset.uri} id={tileset.id} key={tileset.id} />);
 
-    }.bind(this));
+    };
 
     return (
       <div className="tileset-bases">

@@ -54,12 +54,12 @@ class MainCanvas extends React.Component {
     var width = 0;
     var height = 0;
 
-    for (var i = 0; i < this.props.tilesets.length; i++) {
-      width = Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tilesets[i].tileSize);
-      //height += Math.max(width, tilesetTemplate[this.props.tilesets[i].type].width * this.props.tilesets[i].tileSize);
-    }
+    for(var tileset of this.props.tilesets.values()) {
 
-    height = this.props.tilesets[this.props.tilesets.length - 1].y + this.props.tilesets[this.props.tilesets.length - 1].height;
+      width = Math.max(width, tilesetTemplate[tileset.type].width * tileset.tileSize);
+      height = tileset.y + tileset.height;
+
+    }
 
     this.canvas.width = width;
     this.canvas.height = height;
@@ -74,19 +74,19 @@ class MainCanvas extends React.Component {
 
     this.setCanvasSize();
 
-    for (i = 0; i < this.props.tilesets.length; i++) {
+    for(var tileset of this.props.tilesets.values()) {
 
 
-      for (h = 0; h < tilesetTemplate[this.props.tilesets[i].type].height * 2; h++) {
+      for (h = 0; h < tilesetTemplate[tileset.type].height * 2; h++) {
 
-        for (w = 0; w < tilesetTemplate[this.props.tilesets[i].type].width * 2; w++) {
+        for (w = 0; w < tilesetTemplate[tileset.type].width * 2; w++) {
 
           this.drawTile(
-            this.props.tilesets[i].img, //sprite
-            this.props.tilesets[i].x + (w * (this.props.tilesets[i].tileSize / 2)), //x
-            this.props.tilesets[i].y + (h * (this.props.tilesets[i].tileSize / 2)), //y
-            tilesetTemplate[this.props.tilesets[i].type].map[(tilesetTemplate[this.props.tilesets[i].type].width * 2) * h + w] - 1, //type
-            this.props.tilesets[i].tileSize //tileSize
+            tileset.img, //sprite
+            tileset.x + (w * (tileset.tileSize / 2)), //x
+            tileset.y + (h * (tileset.tileSize / 2)), //y
+            tilesetTemplate[tileset.type].map[(tilesetTemplate[tileset.type].width * 2) * h + w] - 1, //type
+            tileset.tileSize //tileSize
           );
 
         }
@@ -99,9 +99,9 @@ class MainCanvas extends React.Component {
 
   render() {
 
-    if(this.ctx && this.props.tilesets.length > 0)
+    if(this.ctx && this.props.tilesets.size > 0)
       this.generateTileset();
-    else if(this.ctx && this.props.tilesets.length == 0)
+    else if(this.ctx && this.props.tilesets.size == 0)
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     return (

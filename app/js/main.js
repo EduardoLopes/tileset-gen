@@ -17,7 +17,7 @@ class TilesetGen extends React.Component{
     this.currentID = 0;
 
     this.state = {
-      tilesets: [],
+      tilesets: new Map(),
       selectedTileSet: []
     };
 
@@ -52,17 +52,17 @@ class TilesetGen extends React.Component{
 
           var y = 0;
 
-          if(tilesets.length === 1){
+          if(tilesets.size === 1){
 
             y = this.lastHeight;
 
-          } else if(tilesets.length >= 1){
+          } else if(tilesets.size >= 1){
 
             y = this.lastY + this.lastHeight;
 
           }
 
-          tilesets[ID] = {
+          tilesets.set(ID, {
             uri: dataUri,
             img: img,
             id: ID,
@@ -72,9 +72,9 @@ class TilesetGen extends React.Component{
             y: y,
             width: 0,
             height: tilesetTemplate[0].height * (img.naturalWidth / 2)
-          };
+          });
 
-          this.lastHeight = tilesets[ID].height;
+          this.lastHeight = tilesets.get(ID).height;
           this.lastY = y;
 
 
@@ -97,11 +97,11 @@ class TilesetGen extends React.Component{
 
       y = 0;
 
-      if(tilesets.length === 1){
+      if(tilesets.size === 1){
 
         y = height;
 
-      } else if(tilesets.length > 1){
+      } else if(tilesets.size > 1){
 
         y = lastY + height;
 
@@ -121,7 +121,7 @@ class TilesetGen extends React.Component{
 
     for (var i = 0; i < this.state.selectedTileSet.length; i++) {
 
-      _.pull( this.state.tilesets, this.state.tilesets[ this.state.selectedTileSet[i] ] );
+      this.state.tilesets.delete( this.state.selectedTileSet[i] );
 
     }
 
@@ -140,8 +140,8 @@ class TilesetGen extends React.Component{
 
     var tilesets = this.state.tilesets, y = 0;
 
-    tilesets[id].type = +type;
-    tilesets[id].height = tilesetTemplate[tilesets[id].type].height * tilesets[id].tileSize;
+    tilesets.get(id).type = +type;
+    tilesets.get(id).height = tilesetTemplate[tilesets.get(id).type].height * tilesets.get(id).tileSize;
 
     this.recalcYPosition(tilesets);
 
