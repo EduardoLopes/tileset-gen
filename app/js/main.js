@@ -31,6 +31,8 @@ class TilesetGen extends React.Component{
     this.lastHeight = 0;
     this.lastY = 0;
 
+    this.canvasRef = React.createRef();
+
   }
 
   handleTilesetUpload(file){
@@ -187,10 +189,10 @@ class TilesetGen extends React.Component{
     return (
       <div>
         <TopBar/>
-        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} />
+        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} canvasRef={this.canvasRef} />
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} />
         <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
-        <MainCanvas tilesets={this.state.tilesets} />
+        <MainCanvas ref={this.canvasRef} tilesets={this.state.tilesets} />
       </div>
     );
   }

@@ -1,5 +1,7 @@
 var React = require('react');
 var MenuItem = require('./menu-item.js');
+var canvasToBlob = require('../vendor/canvasToBlob.js');
+var saveAs = require('../vendor/FileSaver.js');
 
 
 function clearFileInput(fileInput) {
@@ -32,7 +34,7 @@ class ConfigBar extends React.Component{
 
             this.props.selectAll();
 
-          }.bind(this),
+          }.bind(this)
         },
         {
           url: '#',
@@ -43,7 +45,20 @@ class ConfigBar extends React.Component{
 
             this.inputRef.current.click();
 
-          }.bind(this),
+          }.bind(this)
+        },
+        {
+          url: '#',
+          name: 'Download',
+          onClick:  function(event){
+
+            event.preventDefault();
+
+            this.props.canvasRef.current.canvas.toBlob(function(blob) {
+              saveAs(blob, "tileset.png");
+            });
+
+          }.bind(this)
         }
       ]
     };

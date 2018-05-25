@@ -10,15 +10,6 @@ class TopBar extends React.Component{
     this.state = {
       data: [
         {
-          url: '#',
-          name: 'Download',
-          onClick:  function(event){
-
-            event.preventDefault();
-
-          },
-        },
-        {
           url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#how-it-works',
           name: 'Help',
           onClick:  function(event){

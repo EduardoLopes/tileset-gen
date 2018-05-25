@@ -1,7 +1,5 @@
 var React = require('react');
 var Blob = require('../vendor/Blob.js');
-var canvasToBlob = require('../vendor/canvasToBlob.js');
-var saveAs = require('../vendor/FileSaver.js');
 
 var tilesetTemplate = require('../template.js');
 
@@ -12,14 +10,6 @@ class MainCanvas extends React.Component {
     super(props);
 
     this.canvasRef = React.createRef();
-
-  }
-
-  download(){
-
-    this.canvas.toBlob(function(blob) {
-      saveAs(blob, "tileset.png");
-    });
 
   }
 
@@ -107,7 +97,6 @@ class MainCanvas extends React.Component {
     return (
       <div className="tilesets-container">
         <canvas className="tilesets-canvas" ref={this.canvasRef}></canvas>
-        <button onClick={this.download.bind(this)} className="download">Download</button>
       </div>
     );
   }
