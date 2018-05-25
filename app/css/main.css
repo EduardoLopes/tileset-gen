@@ -55,6 +55,41 @@ body{
   text-decoration: underline;
 }
 
+.config-bar{
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.config-bar .title{
+  font-weight: bold;
+}
+
+.config-bar .title sup{
+  font-size: 9px;
+}
+
+.config-bar .menu{
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin-right: 30px;
+  list-style: none;
+}
+
+.config-bar .menu .item{
+  float: left;
+}
+
+.config-bar .menu .item a{
+  text-decoration: none;
+  color: #181818;
+  padding: 0 7.5px 0 7.5px;
+}
+
+.config-bar .menu .item a:hover{
+  text-decoration: underline;
+}
+
 .tileset-bases{
   border-bottom: 1px solid #ccc;
   overflow-y: hidden;

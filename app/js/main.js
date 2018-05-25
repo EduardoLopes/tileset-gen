@@ -5,6 +5,8 @@ var TopBar = require('./components/top-bar.js');
 var TilesetBasesContainer = require('./components/tileset-bases-container.js');
 var MainCanvas = require('./components/main-canvas.js');
 var EditBar = require('./components/edit-bar.js');
+var ConfigBar = require('./components/config-bar.js');
+
 
 var tilesetTemplate = require('./template.js');
 
@@ -166,11 +168,26 @@ class TilesetGen extends React.Component{
 
   }
 
+  selectAll(){
+
+    this.state.selectedTileSet.length = 0;
+
+    for(var tileset of this.state.tilesets.values()) {
+
+      this.state.selectedTileSet.push(tileset.id);
+
+    }
+
+    this.setState({selectedTileSet: this.state.selectedTileSet});
+
+  }
+
   render() {
 
     return (
       <div>
         <TopBar/>
+        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet}/>
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} handleTilesetUpload={this.handleTilesetUpload} />
         <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
         <MainCanvas tilesets={this.state.tilesets} />

@@ -1,7 +1,7 @@
 var React = require('react');
 var MenuItem = require('./menu-item.js');
 
-class TopBar extends React.Component{
+class ConfigBar extends React.Component{
 
   constructor(props) {
 
@@ -11,27 +11,14 @@ class TopBar extends React.Component{
       data: [
         {
           url: '#',
-          name: 'Download',
+          name: 'Select All',
           onClick:  function(event){
 
             event.preventDefault();
 
-          },
-        },
-        {
-          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#how-it-works',
-          name: 'Help',
-          onClick:  function(event){
+            this.props.selectAll();
 
-
-          },
-        },
-        {
-          url: 'https://github.com/EduardoLopes/tileset-gen/tree/dev#tileset-gen',
-          name: 'About',
-          onClick: function(event){
-
-          },
+          }.bind(this),
         }
       ]
     };
@@ -50,8 +37,7 @@ class TopBar extends React.Component{
     });
 
     return (
-      <nav className="top-bar">
-        <span className="title">Tileset Gen <sup>Alpha 0.1.1</sup>  </span>
+      <nav className="config-bar clearfix">
         <ul className="menu">
           {menuItens}
         </ul>
@@ -61,4 +47,4 @@ class TopBar extends React.Component{
 
 }
 
-module.exports = TopBar;
+module.exports = ConfigBar;
