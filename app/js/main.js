@@ -119,11 +119,15 @@ class TilesetGen extends React.Component{
 
   onClose(id){
 
-    _.pullAt(this.state.tilesets, [id]);
+    for (var i = 0; i < this.state.selectedTileSet.length; i++) {
+
+      _.pull( this.state.tilesets, this.state.tilesets[ this.state.selectedTileSet[i] ] );
+
+    }
+
+    this.state.selectedTileSet.length = 0;
 
     this.recalcYPosition(this.state.tilesets);
-
-    _.pull(this.state.selectedTileSet, id);
 
     this.setState({
       tilesets: this.state.tilesets,
@@ -166,8 +170,8 @@ class TilesetGen extends React.Component{
     return (
       <div>
         <TopBar/>
-        <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} onClose={this.onClose} handleTilesetUpload={this.handleTilesetUpload} />
-        <EditBar tilesets={this.state.tilesets} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
+        <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} handleTilesetUpload={this.handleTilesetUpload} />
+        <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
         <MainCanvas tilesets={this.state.tilesets} />
       </div>
     );

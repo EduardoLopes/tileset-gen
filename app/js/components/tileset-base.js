@@ -2,18 +2,15 @@ var React = require('react');
 
 class TilesetBase extends React.Component {
 
-  onClose() {
+  constructor(props){
 
-    this.props.close(this.props.id);
-
-    this.removeRef = React.createRef();
+    super(props);
 
   }
 
   hanldeOnClick(event){
 
-    if(this.removeRef != event.target)
-      this.props.select(this.props.id);
+    this.props.select(this.props.id);
 
   }
 
@@ -28,7 +25,6 @@ class TilesetBase extends React.Component {
 
     return (
       <div onClick={this.hanldeOnClick.bind(this)} className={classNane}>
-        <div ref={this.removeRef} onClick={this.onClose.bind(this)} className="remove">x</div>
         <img src={this.props.dataUri} />
       </div>
     );
