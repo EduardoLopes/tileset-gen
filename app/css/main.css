@@ -89,34 +89,6 @@ body{
 
 }
 
-.tileset-bases .base .remove{
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  right: 0;
-  top: 0;
-  font-size: 14px;
-  white-space: normal;
-  line-height: 14px;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  visibility: hidden;
-  cursor: pointer;
-  cursor: pointer;
-}
-
-.tileset-bases .base .remove:hover {
-
-  color: #5E5E5E;
-  background: #e3e3e3;
-}
-
-.tileset-bases .base:hover > .remove{
-
-  visibility: visible;
-
-}
-
 .tileset-bases .add:hover{
   color: #5E5E5E;
   cursor: pointer;
@@ -131,8 +103,22 @@ body{
 }
 
 .config{
-  padding: 15px;
   border-bottom: 1px solid #ccc;
+  min-height: 51px;
+}
+
+.edit-menu{
+  margin: 0;
+  padding: 0;
+  float: left;
+  list-style: none;
+}
+
+.edit-menu li{
+  list-style: none;
+  float: left;
+  padding: 0 10px 0 10px;
+  line-height: 50px;
 }
 
 .tilesets-container{
@@ -226,4 +212,3 @@ body{
   background: #FFB3B3;
   cursor: pointer;
 }
-

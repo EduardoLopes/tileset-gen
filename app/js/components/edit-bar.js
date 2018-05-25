@@ -21,9 +21,9 @@ class EditBar extends React.Component {
     var defaultSelectValue = 0;
 
     if(this.props.selected.length <= 0){
-      className = 'hidden';
+      className = 'hidden clearfix';
     } else {
-      className = '';
+      className = 'clearfix';
     }
 
     if(this.props.selected.length >= 1){
@@ -57,18 +57,32 @@ class EditBar extends React.Component {
 
     return (
       <div className="config">
-        <span className={className}> Type:
 
-          <select ref="type" name="type" id="type" value={defaultSelectValue} onChange={this.handleOnSelectChange.bind(this)}>
-            <option value="-1">------------</option>
-            <option value="0">1 - The Blob</option>
-            <option value="1">2</option>
-            <option value="2">3 - Bitwise</option>
-          </select>
 
-          <div onClick={this.props.onClose.bind(this)} className="remove">Remove ({this.props.selected.length})</div>
+        <span className={className}>
+
+          <ul className="edit-menu">
+
+            <li>
+
+              Type: <select ref="type" name="type" id="type" value={defaultSelectValue} onChange={this.handleOnSelectChange.bind(this)}>
+                <option value="-1">------------</option>
+                <option value="0">1 - The Blob</option>
+                <option value="1">2</option>
+                <option value="2">3 - Bitwise</option>
+              </select>
+
+            </li>
+
+            <li>
+              <div onClick={this.props.onClose.bind(this)} className="remove"><a href="#">Remove ({this.props.selected.length})</a></div>
+            </li>
+
+          </ul>
 
         </span>
+
+
       </div>
     );
 
