@@ -56,16 +56,7 @@ body{
 }
 
 .config-bar{
-  padding: 15px;
   border-bottom: 1px solid #ccc;
-}
-
-.config-bar .title{
-  font-weight: bold;
-}
-
-.config-bar .title sup{
-  font-size: 9px;
 }
 
 .config-bar .menu{
@@ -84,10 +75,15 @@ body{
   text-decoration: none;
   color: #181818;
   padding: 0 7.5px 0 7.5px;
+  border-right: 1px solid #ccc;
+  line-height: 35px;
+  height: 35px;
+  display: block;
 }
 
 .config-bar .menu .item a:hover{
   text-decoration: underline;
+  background: #eee;
 }
 
 .tileset-bases{
