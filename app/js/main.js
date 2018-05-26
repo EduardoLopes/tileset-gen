@@ -202,9 +202,43 @@ class TilesetGen extends React.Component{
 
        reader.onload = function(event) {
 
-        var data = event.target.result;
+        var data = JSON.parse(decodeURIComponent(event.target.result));
 
-        //this.setState(JSON.parse(data));
+        var countTilesets = Object.keys(data.tilesets).length - 1;
+
+        for (var key in data.tilesets) {
+
+          if (data.tilesets.hasOwnProperty(key)) {
+
+            var tileset = data.tilesets[key];
+
+            var img = document.createElement('img');
+            img.src = tileset.uri;
+            data.tilesets[key].img = img;
+
+            img.onload = function(){
+
+              countTilesets--;
+
+              if(countTilesets == 0){
+
+                this.setState({
+                  tilesets: {},
+                  selectedTileSet: [],
+                  currentID: 0,
+                  lastHeight: 0,
+                  lastY: 0
+                });
+
+                this.setState(data);
+
+              }
+
+            }.bind(this);
+
+          }
+
+        }
 
       }.bind(this);
 

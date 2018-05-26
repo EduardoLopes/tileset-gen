@@ -1,5 +1,6 @@
 var React = require('react');
 var Blob = require('../vendor/Blob.js');
+var _ = require('lodash');
 
 var tilesetTemplate = require('../template.js');
 
