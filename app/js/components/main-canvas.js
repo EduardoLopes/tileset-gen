@@ -44,11 +44,14 @@ class MainCanvas extends React.Component {
     var width = 0;
     var height = 0;
 
-    for(var tileset of this.props.tilesets.values()) {
+    for (var key in this.props.tilesets) {
+      if (this.props.tilesets.hasOwnProperty(key)) {
 
-      width = Math.max(width, tilesetTemplate[tileset.type].width * tileset.tileSize);
-      height = tileset.y + tileset.height;
+        var tileset = this.props.tilesets[key];
+        width = Math.max(width, tilesetTemplate[tileset.type].width * tileset.tileSize);
+        height = tileset.y + tileset.height;
 
+      }
     }
 
     this.canvas.width = width;
@@ -64,20 +67,25 @@ class MainCanvas extends React.Component {
 
     this.setCanvasSize();
 
-    for(var tileset of this.props.tilesets.values()) {
+    for (var key in this.props.tilesets) {
 
+      if (this.props.tilesets.hasOwnProperty(key)) {
 
-      for (h = 0; h < tilesetTemplate[tileset.type].height * 2; h++) {
+        var tileset = this.props.tilesets[key];
 
-        for (w = 0; w < tilesetTemplate[tileset.type].width * 2; w++) {
+        for (h = 0; h < tilesetTemplate[tileset.type].height * 2; h++) {
 
-          this.drawTile(
-            tileset.img, //sprite
-            tileset.x + (w * (tileset.tileSize / 2)), //x
-            tileset.y + (h * (tileset.tileSize / 2)), //y
-            tilesetTemplate[tileset.type].map[(tilesetTemplate[tileset.type].width * 2) * h + w] - 1, //type
-            tileset.tileSize //tileSize
-          );
+          for (w = 0; w < tilesetTemplate[tileset.type].width * 2; w++) {
+
+            this.drawTile(
+              tileset.img, //sprite
+              tileset.x + (w * (tileset.tileSize / 2)), //x
+              tileset.y + (h * (tileset.tileSize / 2)), //y
+              tilesetTemplate[tileset.type].map[(tilesetTemplate[tileset.type].width * 2) * h + w] - 1, //type
+              tileset.tileSize //tileSize
+            );
+
+          }
 
         }
 
@@ -89,9 +97,9 @@ class MainCanvas extends React.Component {
 
   render() {
 
-    if(this.ctx && this.props.tilesets.size > 0)
+    if(this.ctx && Object.keys(this.props.tilesets).length > 0)
       this.generateTileset();
-    else if(this.ctx && this.props.tilesets.size == 0)
+    else if(this.ctx && Object.keys(this.props.tilesets).length == 0)
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     return (

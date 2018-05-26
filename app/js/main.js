@@ -7,7 +7,6 @@ var MainCanvas = require('./components/main-canvas.js');
 var EditBar = require('./components/edit-bar.js');
 var ConfigBar = require('./components/config-bar.js');
 
-
 var tilesetTemplate = require('./template.js');
 
 class TilesetGen extends React.Component{
@@ -17,7 +16,7 @@ class TilesetGen extends React.Component{
     super(props);
 
     this.state = {
-      tilesets: new Map(),
+      tilesets: {},
       selectedTileSet: [],
       currentID: 0,
       lastHeight: 0,
@@ -54,17 +53,17 @@ class TilesetGen extends React.Component{
 
           var y = 0;
 
-          if(tilesets.size === 1){
+          if(Object.keys(tilesets).length === 1){
 
             y = this.state.lastHeight;
 
-          } else if(tilesets.size >= 1){
+          } else if(Object.keys(tilesets).length >= 1){
 
             y = this.state.lastY + this.state.lastHeight;
 
           }
 
-          tilesets.set(ID, {
+          tilesets[ID] = {
             uri: dataUri,
             img: img,
             id: ID,
@@ -74,10 +73,10 @@ class TilesetGen extends React.Component{
             y: y,
             width: 0,
             height: tilesetTemplate[0].height * (img.naturalWidth / 2)
-          });
+          };
 
           this.setState({
-            lastHeight: tilesets.get(ID).height,
+            lastHeight: tilesets[ID].height,
             lastY: y,
             tilesets: tilesets,
             currentID: this.state.currentID
@@ -96,25 +95,29 @@ class TilesetGen extends React.Component{
 
     var y = 0, height = 0, lastY = 0;
 
-    tilesets.forEach(function(tileset){
+    for (var key in this.state.tilesets) {
+      if (this.state.tilesets.hasOwnProperty(key)) {
 
-      y = 0;
+        var tileset = this.state.tilesets[key];
 
-      if(tilesets.size === 1){
+        y = 0;
 
-        y = height;
+        if(Object.keys(tilesets).length === 1){
 
-      } else if(tilesets.size > 1){
+          y = height;
 
-        y = lastY + height;
+        } else if(Object.keys(tilesets).length > 1){
+
+          y = lastY + height;
+
+        }
+
+        lastY = y;
+        tileset.y = y;
+        height = tileset.height;
 
       }
-
-      lastY = y;
-      tileset.y = y;
-      height = tileset.height;
-
-    });
+    };
 
     this.setState({
       lastHeight: height,
@@ -127,7 +130,7 @@ class TilesetGen extends React.Component{
 
     for (var i = 0; i < this.state.selectedTileSet.length; i++) {
 
-      this.state.tilesets.delete( this.state.selectedTileSet[i] );
+      this.state.tilesets = _.omit(this.state.tilesets, this.state.selectedTileSet[i]);
 
     }
 
@@ -146,8 +149,8 @@ class TilesetGen extends React.Component{
 
     var tilesets = this.state.tilesets, y = 0;
 
-    tilesets.get(id).type = +type;
-    tilesets.get(id).height = tilesetTemplate[tilesets.get(id).type].height * tilesets.get(id).tileSize;
+    tilesets[id].type = +type;
+    tilesets[id].height = tilesetTemplate[tilesets[id].type].height * tilesets[id].tileSize;
 
     this.recalcYPosition(tilesets);
 
@@ -175,9 +178,14 @@ class TilesetGen extends React.Component{
 
     this.state.selectedTileSet.length = 0;
 
-    for(var tileset of this.state.tilesets.values()) {
+    for (var key in this.state.tilesets) {
 
-      this.state.selectedTileSet.push(tileset.id);
+      if (this.state.tilesets.hasOwnProperty(key)) {
+
+        var tileset = this.state.tilesets[key];
+        this.state.selectedTileSet.push(tileset.id);
+
+      }
 
     }
 
