@@ -35,7 +35,7 @@ class ConfigBar extends React.Component{
           var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
 
           event.target.setAttribute("href",          dataStr);
-          event.target.setAttribute("download", "scene.json");
+          event.target.setAttribute("download", "tile-sheet.json");
 
           }.bind(this)
 
