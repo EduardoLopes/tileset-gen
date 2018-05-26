@@ -29,30 +29,6 @@ class ConfigBar extends React.Component{
       data: [
         {
           url: '#',
-          name: 'Export',
-          onClick:  function(event){
-
-          var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
-
-          event.target.setAttribute("href",          dataStr);
-          event.target.setAttribute("download", "tile-sheet.json");
-
-          }.bind(this)
-
-        },
-        {
-          url: '#',
-          name: 'Import',
-          onClick:  function(event){
-
-            event.preventDefault();
-
-            this.importRef.current.click();
-
-          }.bind(this)
-        },
-        {
-          url: '#',
           name: 'Select All',
           onClick:  function(event){
 
@@ -75,7 +51,7 @@ class ConfigBar extends React.Component{
         },
         {
           url: '#',
-          name: 'Upload',
+          name: 'Add Tileset',
           onClick:  function(event){
 
             event.preventDefault();
@@ -96,7 +72,31 @@ class ConfigBar extends React.Component{
             });
 
           }.bind(this)
-        }
+        },
+        {
+          url: '#',
+          name: 'Export',
+          onClick:  function(event){
+
+          var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
+
+          event.target.setAttribute("href",          dataStr);
+          event.target.setAttribute("download", "tile-sheet.json");
+
+          }.bind(this)
+
+        },
+        {
+          url: '#',
+          name: 'Import',
+          onClick:  function(event){
+
+            event.preventDefault();
+
+            this.importRef.current.click();
+
+          }.bind(this)
+        },
       ]
     };
 
