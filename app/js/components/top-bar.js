@@ -42,7 +42,7 @@ class TopBar extends React.Component{
 
     return (
       <nav className="top-bar">
-        <span className="title">Tileset Gen <sup>Alpha 0.1.1</sup>  </span>
+        <span className="title">Tileset Gen <sup>Alpha 0.2.0</sup>  </span>
         <ul className="menu">
           {menuItens}
         </ul>
