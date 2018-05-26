@@ -193,6 +193,14 @@ class TilesetGen extends React.Component{
 
   }
 
+  deselectAll(){
+
+    this.state.selectedTileSet.length = 0;
+
+    this.setState({selectedTileSet: this.state.selectedTileSet});
+
+  }
+
   importState(file){
 
     if (file) {
@@ -251,7 +259,7 @@ class TilesetGen extends React.Component{
     return (
       <div>
         <TopBar/>
-        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} canvasRef={this.canvasRef} state={this.state} importState={this.importState.bind(this)} />
+        <ConfigBar selectAll={this.selectAll.bind(this)} deselectAll={this.deselectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} canvasRef={this.canvasRef} state={this.state} importState={this.importState.bind(this)} />
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} />
         <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
         <MainCanvas ref={this.canvasRef} tilesets={this.state.tilesets} />

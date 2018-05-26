@@ -64,6 +64,17 @@ class ConfigBar extends React.Component{
         },
         {
           url: '#',
+          name: 'Deselect All',
+          onClick:  function(event){
+
+            event.preventDefault();
+
+            this.props.deselectAll();
+
+          }.bind(this)
+        },
+        {
+          url: '#',
           name: 'Upload',
           onClick:  function(event){
 
