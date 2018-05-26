@@ -27,6 +27,20 @@ class ConfigBar extends React.Component{
       data: [
         {
           url: '#',
+          name: 'Export',
+          onClick:  function(event){
+
+          var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
+
+          console.log(dataStr)
+
+          event.target.setAttribute("href",     dataStr     );
+          event.target.setAttribute("download", "scene.json");
+
+          }.bind(this)
+        },
+        {
+          url: '#',
           name: 'Select All',
           onClick:  function(event){
 

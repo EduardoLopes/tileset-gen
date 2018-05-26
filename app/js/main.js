@@ -83,6 +83,8 @@ class TilesetGen extends React.Component{
             currentID: this.state.currentID
           });
 
+          console.log(JSON.parse(JSON.stringify(this.state)));
+
         }.bind(this);
 
 
@@ -190,7 +192,7 @@ class TilesetGen extends React.Component{
     return (
       <div>
         <TopBar/>
-        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} canvasRef={this.canvasRef} />
+        <ConfigBar selectAll={this.selectAll.bind(this)} selected={this.state.selectedTileSet} onTilesetUpload={this.handleTilesetUpload} canvasRef={this.canvasRef} state={this.state} />
         <TilesetBasesContainer selected={this.state.selectedTileSet} selectTileset={this.handleSelectTileset} tilesets={this.state.tilesets} />
         <EditBar tilesets={this.state.tilesets} onClose={this.onClose} updateTileset={this.handleUpdateTileset} selected={this.state.selectedTileSet} />
         <MainCanvas ref={this.canvasRef} tilesets={this.state.tilesets} />
