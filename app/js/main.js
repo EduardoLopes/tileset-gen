@@ -16,20 +16,18 @@ class TilesetGen extends React.Component{
 
     super(props);
 
-    this.currentID = 0;
-
     this.state = {
       tilesets: new Map(),
-      selectedTileSet: []
+      selectedTileSet: [],
+      currentID: 0,
+      lastHeight: 0,
+      lastY: 0
     };
 
     this.handleTilesetUpload = this.handleTilesetUpload.bind(this);
     this.onClose = this.onClose.bind(this);
     this.handleUpdateTileset = this.handleUpdateTileset.bind(this);
     this.handleSelectTileset = this.handleSelectTileset.bind(this);
-
-    this.lastHeight = 0;
-    this.lastY = 0;
 
     this.canvasRef = React.createRef();
 
@@ -52,17 +50,17 @@ class TilesetGen extends React.Component{
 
         img.onload = function(){
 
-          var ID = this.currentID++;
+          var ID = this.state.currentID++;
 
           var y = 0;
 
           if(tilesets.size === 1){
 
-            y = this.lastHeight;
+            y = this.state.lastHeight;
 
           } else if(tilesets.size >= 1){
 
-            y = this.lastY + this.lastHeight;
+            y = this.state.lastY + this.state.lastHeight;
 
           }
 
@@ -78,11 +76,12 @@ class TilesetGen extends React.Component{
             height: tilesetTemplate[0].height * (img.naturalWidth / 2)
           });
 
-          this.lastHeight = tilesets.get(ID).height;
-          this.lastY = y;
-
-
-          this.setState({tilesets: tilesets});
+          this.setState({
+            lastHeight: tilesets.get(ID).height,
+            lastY: y,
+            tilesets: tilesets,
+            currentID: this.state.currentID
+          });
 
         }.bind(this);
 
@@ -117,8 +116,10 @@ class TilesetGen extends React.Component{
 
     });
 
-    this.lastHeight = height;
-    this.lastY = y;
+    this.setState({
+      lastHeight: height,
+      lastY: y
+    });
 
   }
 
