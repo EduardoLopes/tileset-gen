@@ -19,8 +19,10 @@ class ConfigBar extends React.Component{
 
     super(props);
 
-    this.inputRef = React.createRef();
+    this.uploadRef = React.createRef();
+    this.importRef = React.createRef();
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleImportOnChange = this.handleImportOnChange.bind(this);
 
 
     this.state = {
@@ -32,10 +34,20 @@ class ConfigBar extends React.Component{
 
           var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
 
-          console.log(dataStr)
-
-          event.target.setAttribute("href",     dataStr     );
+          event.target.setAttribute("href",          dataStr);
           event.target.setAttribute("download", "scene.json");
+
+          }.bind(this)
+
+        },
+        {
+          url: '#',
+          name: 'Import',
+          onClick:  function(event){
+
+            event.preventDefault();
+
+            this.importRef.current.click();
 
           }.bind(this)
         },
@@ -57,7 +69,7 @@ class ConfigBar extends React.Component{
 
             event.preventDefault();
 
-            this.inputRef.current.click();
+            this.uploadRef.current.click();
 
           }.bind(this)
         },
@@ -89,6 +101,14 @@ class ConfigBar extends React.Component{
 
   }
 
+  handleImportOnChange(event){
+
+    this.props.importState(event.target.files[0]);
+
+    clearFileInput(event.target);
+
+  }
+
   render() {
 
     var menuItens = this.state.data.map(function(item, index) {
@@ -104,7 +124,8 @@ class ConfigBar extends React.Component{
       <nav className="config-bar clearfix">
         <ul className="menu">
           {menuItens}
-          <input ref={this.inputRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange} required multiple />
+          <input ref={this.uploadRef} type="file" accept="image/*" className="file-input" onChange={this.handleOnChange} required multiple />
+          <input ref={this.importRef} type="file" accept="application/json" className="file-input" onChange={this.handleImportOnChange} required />
         </ul>
       </nav>
     );
