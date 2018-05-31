@@ -1,8 +1,7 @@
-var React = require('react');
-var MenuItem = require('./menu-item.js');
-var canvasToBlob = require('../vendor/canvasToBlob.js');
-var saveAs = require('../vendor/FileSaver.js');
-
+import React from 'react';
+import MenuItem from './menu-item.js';
+import canvasToBlob from '../vendor/canvasToBlob.js';
+import saveAs from '../vendor/FileSaver.js';
 
 function clearFileInput(fileInput) {
   try {
@@ -13,7 +12,7 @@ function clearFileInput(fileInput) {
   }
 }
 
-class ConfigBar extends React.Component{
+export default class ConfigBar extends React.Component{
 
   constructor(props) {
 
@@ -143,5 +142,3 @@ class ConfigBar extends React.Component{
   }
 
 }
-
-module.exports = ConfigBar;

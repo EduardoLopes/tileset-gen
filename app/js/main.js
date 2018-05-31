@@ -1,13 +1,12 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var _ = require('lodash');
-var TopBar = require('./components/top-bar.js');
-var TilesetBasesContainer = require('./components/tileset-bases-container.js');
-var MainCanvas = require('./components/main-canvas.js');
-var EditBar = require('./components/edit-bar.js');
-var ConfigBar = require('./components/config-bar.js');
-
-var tilesetTemplate = require('./template.js');
+import React from "react";
+import ReactDOM from "react-dom";
+import _ from 'lodash';
+import TopBar from './components/top-bar.js';
+import TilesetBasesContainer from './components/tileset-bases-container.js';
+import MainCanvas from './components/main-canvas.js';
+import EditBar from './components/edit-bar.js';
+import ConfigBar from './components/config-bar.js';
+import tilesetTemplate from './template.js';
 
 class TilesetGen extends React.Component{
 

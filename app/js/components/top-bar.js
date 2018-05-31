@@ -1,7 +1,7 @@
-var React = require('react');
-var MenuItem = require('./menu-item.js');
+import React from 'react';
+import MenuItem from './menu-item.js';
 
-class TopBar extends React.Component{
+export default class TopBar extends React.Component{
 
   constructor(props) {
 
@@ -51,5 +51,3 @@ class TopBar extends React.Component{
   }
 
 }
-
-module.exports = TopBar;

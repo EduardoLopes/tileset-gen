@@ -1,7 +1,7 @@
-var React = require('react');
-var _ = require('lodash');
-var TilesetBase = require('./tileset-base.js');
-var TilesetUpload = require('./tileset-upload.js');
+import React from 'react';
+import _ from 'lodash';
+import TilesetBase from './tileset-base.js';
+import TilesetUpload from './tileset-upload.js';
 
 class TilesetBaseContainer extends React.Component {
 

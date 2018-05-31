@@ -1,10 +1,9 @@
-var React = require('react');
-var Blob = require('../vendor/Blob.js');
-var _ = require('lodash');
+import React from 'react';
+import Blob from '../vendor/Blob.js';
+import _ from 'lodash';
+import tilesetTemplate from '../template.js';
 
-var tilesetTemplate = require('../template.js');
-
-class MainCanvas extends React.Component {
+export default class MainCanvas extends React.Component {
 
   constructor(props){
 
@@ -111,5 +110,3 @@ class MainCanvas extends React.Component {
   }
 
 }
-
-module.exports = MainCanvas;

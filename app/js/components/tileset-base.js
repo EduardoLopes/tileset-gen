@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-class TilesetBase extends React.Component {
+export default class TilesetBase extends React.Component {
 
   constructor(props){
 
@@ -31,5 +31,3 @@ class TilesetBase extends React.Component {
   }
 
 }
-
-module.exports = TilesetBase;

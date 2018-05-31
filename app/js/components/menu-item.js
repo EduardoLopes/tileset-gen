@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-class MenuItem extends React.Component {
+export default class MenuItem extends React.Component {
 
   render() {
     return (
@@ -13,5 +13,3 @@ class MenuItem extends React.Component {
   }
 
 }
-
-module.exports = MenuItem;

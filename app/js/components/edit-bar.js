@@ -1,7 +1,7 @@
-var React = require('react');
-var _ = require('lodash');
+import React from 'react';
+import _ from 'lodash';
 
-class EditBar extends React.Component {
+export default class EditBar extends React.Component {
 
   handleOnSelectChange(){
 
@@ -90,5 +90,3 @@ class EditBar extends React.Component {
   }
 
 }
-
-module.exports = EditBar;

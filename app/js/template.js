@@ -38,4 +38,4 @@ tilesetTemplate[3] = {
 //  height: 2
 //};
 
-module.exports = tilesetTemplate;
+export default tilesetTemplate;

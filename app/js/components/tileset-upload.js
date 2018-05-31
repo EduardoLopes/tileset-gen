@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 function clearFileInput(fileInput) {
   try {
@@ -47,5 +47,3 @@ class TilesetUpload extends React.Component{
   }
 
 }
-
-module.exports = TilesetUpload;
