@@ -7,13 +7,13 @@ class TilesetBaseContainer extends React.Component {
 
   render() {
 
-    var tilesetItens = [];
+    let tilesetItens = [];
 
-    for (var key in this.props.tilesets) {
+    for (let key in this.props.tilesets) {
       if (this.props.tilesets.hasOwnProperty(key)) {
-        var tileset = this.props.tilesets[key];
+        let tileset = this.props.tilesets[key];
 
-        var selected = false;
+        let selected = false;
 
         if(_.indexOf(this.props.selected, tileset.id) > -1){
           selected = true;

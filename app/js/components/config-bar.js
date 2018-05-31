@@ -77,7 +77,7 @@ export default class ConfigBar extends React.Component{
           name: 'Export',
           onClick:  function(event){
 
-          var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
+          let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.state));
 
           event.target.setAttribute("href",          dataStr);
           event.target.setAttribute("download", "tile-sheet.json");
@@ -103,7 +103,7 @@ export default class ConfigBar extends React.Component{
 
   handleOnChange(event){
 
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.props.onTilesetUpload(event.target.files[i]);
     }
 
@@ -121,7 +121,7 @@ export default class ConfigBar extends React.Component{
 
   render() {
 
-    var menuItens = this.state.data.map(function(item, index) {
+    let menuItens = this.state.data.map(function(item, index) {
       return (
         <MenuItem handleOnClick={item.onClick} url={item.url} key={index}>
           {item.name}

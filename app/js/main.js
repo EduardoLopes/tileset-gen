@@ -33,7 +33,7 @@ class TilesetGen extends React.Component{
 
   handleTilesetUpload(file){
 
-    var tilesets = this.state.tilesets;
+    let tilesets = this.state.tilesets;
 
     if (file) {
 
@@ -42,15 +42,15 @@ class TilesetGen extends React.Component{
 
        reader.onload = function(event) {
 
-        var dataUri = event.target.result;
-        var img = document.createElement('img');
+        let dataUri = event.target.result;
+        let img = document.createElement('img');
         img.src = dataUri;
 
         img.onload = function(){
 
-          var ID = this.state.currentID++;
+          let ID = this.state.currentID++;
 
-          var y = 0;
+          let y = 0;
 
           if(Object.keys(tilesets).length === 1){
 
@@ -92,12 +92,12 @@ class TilesetGen extends React.Component{
 
   recalcYPosition(tilesets){
 
-    var y = 0, height = 0, lastY = 0;
+    let y = 0, height = 0, lastY = 0;
 
-    for (var key in this.state.tilesets) {
+    for (let key in this.state.tilesets) {
       if (this.state.tilesets.hasOwnProperty(key)) {
 
-        var tileset = this.state.tilesets[key];
+        let tileset = this.state.tilesets[key];
 
         y = 0;
 
@@ -127,7 +127,7 @@ class TilesetGen extends React.Component{
 
   onClose(id){
 
-    for (var i = 0; i < this.state.selectedTileSet.length; i++) {
+    for (let i = 0; i < this.state.selectedTileSet.length; i++) {
 
       this.state.tilesets = _.omit(this.state.tilesets, this.state.selectedTileSet[i]);
 
@@ -146,7 +146,7 @@ class TilesetGen extends React.Component{
 
   handleUpdateTileset(id, type){
 
-    var tilesets = this.state.tilesets, y = 0;
+    let tilesets = this.state.tilesets, y = 0;
 
     tilesets[id].type = +type;
     tilesets[id].height = tilesetTemplate[tilesets[id].type].height * tilesets[id].tileSize;
@@ -177,11 +177,11 @@ class TilesetGen extends React.Component{
 
     this.state.selectedTileSet.length = 0;
 
-    for (var key in this.state.tilesets) {
+    for (let key in this.state.tilesets) {
 
       if (this.state.tilesets.hasOwnProperty(key)) {
 
-        var tileset = this.state.tilesets[key];
+        let tileset = this.state.tilesets[key];
         this.state.selectedTileSet.push(tileset.id);
 
       }
@@ -204,22 +204,22 @@ class TilesetGen extends React.Component{
 
     if (file) {
 
-      reader = new FileReader();
+      let reader = new FileReader();
       reader.readAsText(file);
 
        reader.onload = function(event) {
 
-        var data = JSON.parse(decodeURIComponent(event.target.result));
+        let data = JSON.parse(decodeURIComponent(event.target.result));
 
-        var countTilesets = Object.keys(data.tilesets).length - 1;
+        let countTilesets = Object.keys(data.tilesets).length - 1;
 
-        for (var key in data.tilesets) {
+        for (let key in data.tilesets) {
 
           if (data.tilesets.hasOwnProperty(key)) {
 
-            var tileset = data.tilesets[key];
+            let tileset = data.tilesets[key];
 
-            var img = document.createElement('img');
+            let img = document.createElement('img');
             img.src = tileset.uri;
             data.tilesets[key].img = img;
 

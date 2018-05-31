@@ -15,7 +15,7 @@ export default class TilesetBase extends React.Component {
   }
 
   render () {
-    var classNane;
+    let classNane;
 
     if(this.props.selected){
       classNane = 'base tileset-base active';

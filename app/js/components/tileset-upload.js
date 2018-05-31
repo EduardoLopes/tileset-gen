@@ -29,7 +29,7 @@ class TilesetUpload extends React.Component{
 
   handleOnChange(event){
 
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.props.onTilesetUpload(event.target.files[i]);
     }
 

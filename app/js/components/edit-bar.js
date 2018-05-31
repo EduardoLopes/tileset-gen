@@ -17,8 +17,8 @@ export default class EditBar extends React.Component {
 
   render() {
 
-    var className;
-    var defaultSelectValue = 0;
+    let className;
+    let defaultSelectValue = 0;
 
     if(this.props.selected.length <= 0){
       className = 'hidden clearfix';
@@ -28,9 +28,9 @@ export default class EditBar extends React.Component {
 
     if(this.props.selected.length >= 1){
 
-      var allTheSame = true;
+      let allTheSame = true;
 
-      for (var i = 0; i < this.props.selected.length; i++) {
+      for (let i = 0; i < this.props.selected.length; i++) {
 
         if(this.props.tilesets[this.props.selected[i]].type != this.props.tilesets[this.props.selected[0]].type){
 

@@ -15,8 +15,8 @@ export default class MainCanvas extends React.Component {
 
   drawTile(sprite, x, y, type, tileSize){
 
-    var spriteY = type / 4 >> 0;
-    var spriteX = (type - spriteY * 4);
+    let spriteY = type / 4 >> 0;
+    let spriteX = (type - spriteY * 4);
 
     this.ctx.drawImage(
       sprite,
@@ -41,13 +41,13 @@ export default class MainCanvas extends React.Component {
 
   setCanvasSize(){
 
-    var width = 0;
-    var height = 0;
+    let width = 0;
+    let height = 0;
 
-    for (var key in this.props.tilesets) {
+    for (let key in this.props.tilesets) {
       if (this.props.tilesets.hasOwnProperty(key)) {
 
-        var tileset = this.props.tilesets[key];
+        let tileset = this.props.tilesets[key];
         width = Math.max(width, tilesetTemplate[tileset.type].width * tileset.tileSize);
         height = tileset.y + tileset.height;
 
@@ -63,19 +63,17 @@ export default class MainCanvas extends React.Component {
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    var h = 0, w = 0, i = 0;
-
     this.setCanvasSize();
 
-    for (var key in this.props.tilesets) {
+    for (let key in this.props.tilesets) {
 
       if (this.props.tilesets.hasOwnProperty(key)) {
 
-        var tileset = this.props.tilesets[key];
+        let tileset = this.props.tilesets[key];
 
-        for (h = 0; h < tilesetTemplate[tileset.type].height * 2; h++) {
+        for (let h = 0; h < tilesetTemplate[tileset.type].height * 2; h++) {
 
-          for (w = 0; w < tilesetTemplate[tileset.type].width * 2; w++) {
+          for (let w = 0; w < tilesetTemplate[tileset.type].width * 2; w++) {
 
             this.drawTile(
               tileset.img, //sprite

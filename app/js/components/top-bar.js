@@ -31,7 +31,7 @@ export default class TopBar extends React.Component{
 
   render() {
 
-    var menuItens = this.state.data.map(function(item, index) {
+    let menuItens = this.state.data.map(function(item, index) {
       return (
         <MenuItem handleOnClick={item.onClick} url={item.url} key={index}>
           {item.name}
