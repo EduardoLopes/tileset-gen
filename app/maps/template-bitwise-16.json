@@ -1,8 +1,10 @@
 { "height":4,
+ "infinite":false,
  "layers":[
         {
-         "data":[9, 12, 17, 20, 9, 10, 17, 4, 9, 12, 17, 20, 9, 10, 17, 4, 11, 12, 14, 20, 21, 24, 21, 24, 21, 22, 21, 22, 13, 16, 13, 16, 13, 8, 13, 8, 23, 24, 23, 24, 11, 10, 3, 4, 11, 12, 3, 20, 11, 10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 23, 22, 23, 22, 15, 16, 7, 16, 7, 8, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[9, 12, 17, 20, 9, 10, 17, 4, 9, 12, 17, 20, 9, 10, 17, 4, 11, 12, 3, 20, 21, 24, 21, 24, 21, 22, 21, 22, 13, 16, 13, 16, 13, 8, 13, 8, 23, 24, 23, 24, 11, 10, 3, 4, 11, 12, 3, 20, 11, 10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 23, 22, 23, 22, 7, 16, 7, 16, 7, 8, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":4,
+         "id":1,
          "name":"Tile Layer 1",
          "opacity":1,
          "type":"tilelayer",
@@ -11,30 +13,29 @@
          "x":0,
          "y":0
         }],
+ "nextlayerid":2,
+ "nextobjectid":1,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
+ "renderorder":"right-down",
+ "tiledversion":"2018.09.12",
  "tileheight":16,
  "tilesets":[
         {
+         "columns":4,
          "firstgid":1,
          "image":"..\/img\/tileset-base-test-2.png",
          "imageheight":96,
          "imagewidth":64,
          "margin":0,
          "name":"tileset-base-test-2",
-         "properties":
-            {
-
-            },
          "spacing":0,
+         "tilecount":24,
          "tileheight":16,
          "tilewidth":16,
          "transparentcolor":"#ffffff"
         }],
  "tilewidth":16,
- "version":1,
+ "type":"map",
+ "version":1.2,
  "width":20
 }

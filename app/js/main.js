@@ -37,7 +37,7 @@ class TilesetGen extends React.Component{
 
     if (file) {
 
-      reader = new FileReader();
+      let reader = new FileReader();
       reader.readAsDataURL(file);
 
        reader.onload = function(event) {
